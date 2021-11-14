@@ -9,7 +9,10 @@ package personal.opensrcerer;
 import personal.opensrcerer.circularList.CircularLinkedList;
 import personal.opensrcerer.entities.Suicider;
 import personal.opensrcerer.entities.SuiciderCircularLinkedList;
+import personal.opensrcerer.ui.Window;
 import personal.opensrcerer.util.NameGenerator;
+
+import javax.swing.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,6 +22,45 @@ import java.io.InputStreamReader;
  */
 public class Main {
     /**
+     * Flag to check if look and feel change was successful.
+     */
+    private static boolean lookAndFeelSuccessful = false;
+
+    /**
+     * Start the program's execution.
+     * @param args Arguments taken in if the program was started from console.
+     * @throws UnsupportedLookAndFeelException If neither of the look and feel
+     * types are supported.
+     */
+    public static void main(String[] args) throws UnsupportedLookAndFeelException {
+        // Try to set the UI look and feel to match the system
+        setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        if (!lookAndFeelSuccessful)
+            // Revert to a cross platform version
+            setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+
+        if (!lookAndFeelSuccessful)
+            throw new UnsupportedLookAndFeelException("Program is unable to start, provided look and feels are incompatible!");
+
+        // Invoke managing of the UI to a specific UI management thread
+        SwingUtilities.invokeLater(Window::createAndShowGUI);
+    }
+
+    /**
+     * Set the look and feel of the system with error handling.
+     * @param lfClassName Look and Feel Class Name
+     */
+    private static void setLookAndFeel(String lfClassName) {
+        try {
+            UIManager.setLookAndFeel(lfClassName);
+            lookAndFeelSuccessful = true;
+        } catch (Exception ex) {
+            System.out.println("Look and feel is unsupported.");
+        }
+    }
+
+
+    /**
      * The Buffered Input Stream to be used for input.
      */
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -27,15 +69,15 @@ public class Main {
      * Default main method.
      * @param args Arguments for default main method.
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         runProgram();
-    }
+    }*/
 
     /**
      * The method that takes in input and executes
      * the relevant method of the list.
      */
-    private static void runProgram() {
+    /*private static void runProgram() {
         System.out.print("""
                 Welcome to Kitsos' life-saving program.
                 Please begin by entering the number of individuals
@@ -65,7 +107,7 @@ public class Main {
         }
         System.out.println("The position Kitsos should stay in is: "
                 + list.removeUntilLast(magicNumber).getPosition());
-    }
+    }*/
 
     /**
      * A wrapper method to handle exceptions and parse numbers.
