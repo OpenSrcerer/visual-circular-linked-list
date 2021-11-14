@@ -1,7 +1,7 @@
 package personal.opensrcerer.ui.components.custom;
 
-import personal.opensrcerer.ui.components.stylized.KLabel;
-import personal.opensrcerer.ui.components.stylized.KPanel;
+import personal.opensrcerer.ui.components.regular.KLabel;
+import personal.opensrcerer.ui.components.regular.KPanel;
 import personal.opensrcerer.ui.styling.Fonts;
 
 import java.awt.*;

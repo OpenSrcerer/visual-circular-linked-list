@@ -32,7 +32,7 @@ public class Window extends JFrame {
     public static void createAndShowGUI() {
         build();
         windowSingleton.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Set the exit operation for this window
-        WindowLayout.set(); // Set the elements of this panel
+        WindowLayout.set(); // Set the elements of the Content Pane
         // Pack the window so that the components
         // get their preferred size assigned.
         updateJFrame();
@@ -43,7 +43,7 @@ public class Window extends JFrame {
     /**
      * @return The content pane for the singleton Window JFrame.
      */
-    public static Container getPane() {
+    public static Container contentPane() {
         return windowSingleton.getContentPane();
     }
 

@@ -1,4 +1,4 @@
-package personal.opensrcerer.ui.components.stylized;
+package personal.opensrcerer.ui.components.regular;
 
 import personal.opensrcerer.ui.styling.Painter;
 import personal.opensrcerer.ui.styling.Fonts;
