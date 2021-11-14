@@ -10,6 +10,11 @@ public enum Fonts {
     bigTitleFont(new Font("Century Gothic", Font.BOLD, 30)),
 
     /**
+     * Font used for nodes
+     */
+    nodeFont(new Font("Century Gothic", Font.BOLD, 25)),
+
+    /**
      * Used for large buttons, etc.
      */
    titleFont(new Font("Century Gothic", Font.BOLD, 20)),

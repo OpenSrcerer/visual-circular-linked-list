@@ -1,7 +1,7 @@
 package personal.opensrcerer.ui.components.custom;
 
-import personal.opensrcerer.ui.components.custom.arrows.ArrowLine;
 import personal.opensrcerer.ui.styling.Painter;
+import personal.opensrcerer.util.NameGenerator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,14 +19,17 @@ public class NodeViewPort extends JLayeredPane {
         SuiciderNode[] nodesList = getNodesInCircle(
                 nodes,
                 300,
-                480,
-                330
+                475,
+                300
         );
+
+        for (SuiciderNode node : nodesList) {
+            this.add(node, 10);
+        }
 
         SuiciderNode previous = nodesList[nodes - 1];
         for (SuiciderNode node : nodesList) {
-            this.add(node);
-            this.add(new ArrowLine(previous, node), 1);
+            this.add(new Line(previous, node), 700);
             previous = node;
         }
     }
@@ -47,7 +50,8 @@ public class NodeViewPort extends JLayeredPane {
 
             nodesList[index] = new SuiciderNode(
                     biasX + x,
-                    biasY + y
+                    biasY + y,
+                    NameGenerator.getRandomName()
             );
         }
         return nodesList;

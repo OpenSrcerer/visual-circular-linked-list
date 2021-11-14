@@ -2,6 +2,8 @@ package personal.opensrcerer.util;
 
 import personal.opensrcerer.circularList.CircularLinkedList;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * A singleton utility class that generates unique names.
  */
@@ -218,7 +220,7 @@ public class NameGenerator {
      */
     public static String getRandomName() {
         String name = nameList.getCurrentValue();
-        nameList.next();
+        nameList.next(ThreadLocalRandom.current().nextInt(1, 201));
         return name;
     }
 }

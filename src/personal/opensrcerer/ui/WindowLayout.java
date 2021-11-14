@@ -14,7 +14,7 @@ public abstract class WindowLayout {
         mainPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
 
-        NodeViewPort viewportPane = new NodeViewPort(5);
+        NodeViewPort viewportPane = new NodeViewPort(6);
 
         JPanel viewportWrapper = new KPanel();
         viewportWrapper.add(viewportPane);
