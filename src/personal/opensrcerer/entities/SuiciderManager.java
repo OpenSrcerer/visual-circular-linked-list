@@ -4,9 +4,18 @@ import personal.opensrcerer.circularList.CircularLinkedList;
 import personal.opensrcerer.circularList.CircularNode;
 
 /**
- * A specialized CircularLinkedList that displays output about some of its' operations.
+ * A specialized CircularLinkedList that displays output about some of its operations.
  */
-public class SuiciderCircularLinkedList extends CircularLinkedList<Suicider> {
+public class SuiciderManager extends CircularLinkedList<Suicider> {
+
+    private static SuiciderManager manager = null;
+
+    public static SuiciderManager getInstance() {
+        if (manager == null) {
+            manager = new SuiciderManager();
+        }
+        return manager;
+    }
 
     /**
      * Display the contents of the list.

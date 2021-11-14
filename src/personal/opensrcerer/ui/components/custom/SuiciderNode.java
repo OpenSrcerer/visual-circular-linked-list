@@ -2,7 +2,7 @@ package personal.opensrcerer.ui.components.custom;
 
 import personal.opensrcerer.ui.UIConstants;
 import personal.opensrcerer.ui.components.events.NodeMouseAdapter;
-import personal.opensrcerer.ui.styling.Colors;
+import personal.opensrcerer.ui.styling.DiscordColor;
 import personal.opensrcerer.ui.styling.Fonts;
 import personal.opensrcerer.ui.styling.Painter;
 
@@ -14,12 +14,12 @@ import static personal.opensrcerer.ui.UIConstants.BASE_NODE_SIZE;
 
 public class SuiciderNode extends JButton {
 
-    private Colors color;
+    private DiscordColor color;
     private final Point location;
     private final String name;
 
     public SuiciderNode(int x, int y, String name) {
-        this.color = Colors.discordBlurple;
+        this.color = DiscordColor.blurple;
         this.setLocation(x, y);
         this.setSize(BASE_NODE_SIZE + 8, BASE_NODE_SIZE + 8);
         this.location = new Point(x, y);
@@ -44,7 +44,7 @@ public class SuiciderNode extends JButton {
     }
 
     private void drawNodeFill(Graphics2D g2d) {
-        g2d.setColor(Colors.discordLightGray.get());
+        g2d.setColor(DiscordColor.lightGray.get());
         Ellipse2D.Double circle = new Ellipse2D.Double(
                 UIConstants.STROKE_NODE_OFFSET, UIConstants.STROKE_NODE_OFFSET,
                 BASE_NODE_SIZE, BASE_NODE_SIZE);
@@ -61,7 +61,7 @@ public class SuiciderNode extends JButton {
     private void drawNodeLetter(Graphics2D g2d) {
         g2d.setColor(
                 (isKitsos() ? Color.RED.darker() :
-                Colors.discordGray.get()
+                DiscordColor.regularGray.get()
         ));
         g2d.setFont(Fonts.nodeFont.get());
         g2d.drawString(name.substring(0, 1),
@@ -69,7 +69,7 @@ public class SuiciderNode extends JButton {
                 BASE_NODE_SIZE - UIConstants.STROKE_NODE_OFFSET);
     }
 
-    public void setColor(Colors color) {
+    public void setColor(DiscordColor color) {
         this.color = color;
     }
 

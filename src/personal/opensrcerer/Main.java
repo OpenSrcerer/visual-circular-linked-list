@@ -8,14 +8,11 @@ package personal.opensrcerer;
 
 import personal.opensrcerer.circularList.CircularLinkedList;
 import personal.opensrcerer.entities.Suicider;
-import personal.opensrcerer.entities.SuiciderCircularLinkedList;
+import personal.opensrcerer.entities.SuiciderManager;
 import personal.opensrcerer.ui.Window;
 import personal.opensrcerer.util.NameGenerator;
 
 import javax.swing.*;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 /**
  * The main class for the program.
@@ -40,7 +37,7 @@ public class Main {
             setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 
         if (!lookAndFeelSuccessful)
-            throw new UnsupportedLookAndFeelException("Program is unable to start, provided look and feels are incompatible!");
+            throw new UnsupportedLookAndFeelException("Program is unable to start, provided look and feel-s are incompatible!");
 
         // Invoke managing of the UI to a specific UI management thread
         SwingUtilities.invokeLater(Window::createAndShowGUI);
@@ -59,12 +56,6 @@ public class Main {
         }
     }
 
-
-    /**
-     * The Buffered Input Stream to be used for input.
-     */
-    private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
     /**
      * Default main method.
      * @param args Arguments for default main method.
@@ -77,7 +68,7 @@ public class Main {
      * The method that takes in input and executes
      * the relevant method of the list.
      */
-    /*private static void runProgram() {
+    private static void runProgram() {
         System.out.print("""
                 Welcome to Kitsos' life-saving program.
                 Please begin by entering the number of individuals
@@ -97,7 +88,7 @@ public class Main {
         // Run the program initially once to get Kitsos' position for name display
         int kitsosPosition = list.removeUntilLast(magicNumber).getPosition();
 
-        list = new SuiciderCircularLinkedList();
+        list = new SuiciderManager();
         for (int i = 1; i <= suiciders; ++i) {
             if (i == kitsosPosition) {
                 list.add(new Suicider(i, "Kitsos"));
@@ -107,7 +98,7 @@ public class Main {
         }
         System.out.println("The position Kitsos should stay in is: "
                 + list.removeUntilLast(magicNumber).getPosition());
-    }*/
+    }
 
     /**
      * A wrapper method to handle exceptions and parse numbers.
@@ -118,7 +109,6 @@ public class Main {
         int parsedInput = 0;
         while (parsedInput <= 0) {
             try {
-                parsedInput = Integer.parseInt(br.readLine());
 
                 if (suiciders && parsedInput == 1) {
                     System.out.println("Why don't you just run away then?");

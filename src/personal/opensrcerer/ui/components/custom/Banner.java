@@ -2,6 +2,7 @@ package personal.opensrcerer.ui.components.custom;
 
 import personal.opensrcerer.ui.components.regular.KLabel;
 import personal.opensrcerer.ui.components.regular.KPanel;
+import personal.opensrcerer.ui.styling.DiscordColor;
 import personal.opensrcerer.ui.styling.Fonts;
 
 import java.awt.*;
@@ -23,7 +24,8 @@ public class Banner extends KPanel {
         super();
         this.setPreferredSize(new Dimension(500, 45));
         bannerText = new KLabel("lol", Fonts.bigTitleFont);
-        add(bannerText, BorderLayout.CENTER);
+        this.add(bannerText, BorderLayout.CENTER);
+        this.setBackground(DiscordColor.pastelPurple.get());
     }
 
     /**

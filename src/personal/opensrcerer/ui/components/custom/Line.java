@@ -1,7 +1,7 @@
 package personal.opensrcerer.ui.components.custom;
 
 import personal.opensrcerer.ui.UIConstants;
-import personal.opensrcerer.ui.styling.Colors;
+import personal.opensrcerer.ui.styling.DiscordColor;
 import personal.opensrcerer.ui.styling.Painter;
 
 import javax.swing.*;
@@ -23,7 +23,7 @@ public class Line extends JPanel {
                 target.centerX() + UIConstants.STROKE_NODE_OFFSET,
                 target.centerY() + UIConstants.STROKE_NODE_OFFSET
         );
-        this.setForeground(Colors.discordBlurple.get());
+        this.setForeground(DiscordColor.blurple.get());
     }
 
     @Override

@@ -1,6 +1,6 @@
 package personal.opensrcerer.ui.components.regular;
 
-import personal.opensrcerer.ui.styling.Colors;
+import personal.opensrcerer.ui.styling.DiscordColor;
 
 import javax.swing.*;
 
@@ -10,8 +10,8 @@ import javax.swing.*;
 public class KSeparator extends JSeparator {
     public KSeparator() {
         super();
-        this.setForeground(Colors.discordBlurple.get());
-        this.setBackground(Colors.discordBlurple.get());
+        this.setForeground(DiscordColor.blurple.get());
+        this.setBackground(DiscordColor.blurple.get());
         this.setOpaque(true);
     }
 }

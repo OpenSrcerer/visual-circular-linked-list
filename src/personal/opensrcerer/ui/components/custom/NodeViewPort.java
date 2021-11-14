@@ -13,13 +13,13 @@ import java.awt.*;
 public class NodeViewPort extends JLayeredPane {
     public NodeViewPort(int nodes) {
         this.setLayout(null);
-        this.setPreferredSize(new Dimension(1000,700));
+        this.setPreferredSize(new Dimension(800,700));
         Painter.paintBase(this);
 
         SuiciderNode[] nodesList = getNodesInCircle(
                 nodes,
                 300,
-                475,
+                375,
                 300
         );
 

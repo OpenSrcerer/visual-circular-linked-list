@@ -31,7 +31,7 @@ public abstract class Painter {
      * @param component Component to paint.
      */
     public static void paintBase(Component component) {
-        component.setBackground(Colors.discordGray.get());
-        component.setForeground(Colors.discordLightGray.get());
+        component.setBackground(DiscordColor.regularGray.get());
+        component.setForeground(DiscordColor.lightGray.get());
     }
 }
