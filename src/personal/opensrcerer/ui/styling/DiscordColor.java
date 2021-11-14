@@ -13,7 +13,7 @@ public enum DiscordColor {
     grayest(new Color(47, 49, 54)),
     blurple(new Color(78, 93, 148)),
     purple(new Color(138, 43, 226)),
-    pastelPurple(new Color(94, 75, 118)),
+    darkPurple(new Color(60, 48, 73)),
     idle(new Color(250, 166, 26)),
     dnd(new Color(240, 71, 71));
 

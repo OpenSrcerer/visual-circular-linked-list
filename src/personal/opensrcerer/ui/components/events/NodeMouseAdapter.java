@@ -1,6 +1,7 @@
 package personal.opensrcerer.ui.components.events;
 
 import personal.opensrcerer.ui.Window;
+import personal.opensrcerer.ui.WindowLayout;
 import personal.opensrcerer.ui.components.custom.SuiciderNode;
 import personal.opensrcerer.ui.styling.DiscordColor;
 
@@ -18,6 +19,7 @@ public class NodeMouseAdapter extends MouseAdapter {
     @Override
     public void mouseEntered(MouseEvent e) {
         Window.contentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        WindowLayout.banner.update("Selected: " + node.name());
         node.setColor(DiscordColor.purple);
         node.invalidate();
         node.repaint();
@@ -26,6 +28,7 @@ public class NodeMouseAdapter extends MouseAdapter {
     @Override
     public void mouseExited(MouseEvent e) {
         Window.contentPane().setCursor(Cursor.getDefaultCursor());
+        WindowLayout.banner.update("");
         node.setColor((node.isKitsos()) ? DiscordColor.idle : DiscordColor.blurple);
         node.invalidate();
         node.repaint();

@@ -17,7 +17,7 @@ public enum Fonts {
     /**
      * Used for large buttons, etc.
      */
-   titleFont(new Font("Century Gothic", Font.BOLD, 20)),
+    titleFont(new Font("Century Gothic", Font.PLAIN, 20)),
 
     /**
      * Used for small descriptions.
@@ -27,7 +27,7 @@ public enum Fonts {
     /**
      * Used for small buttons.
      */
-    actionFont(new Font("Arial", Font.BOLD, 15)),
+    actionFont(new Font("Arial", Font.PLAIN, 30)),
 
     /**
      * Used for TextFields.

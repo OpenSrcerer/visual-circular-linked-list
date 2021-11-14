@@ -15,6 +15,12 @@ public class KPanel extends JPanel {
         this.setBackground(color.get());
     }
 
+    public KPanel(int layout, DiscordColor color) {
+        super();
+        this.setLayout(new BoxLayout(this, layout));
+        this.setBackground(color.get());
+    }
+
     public KPanel(LayoutManager manager) {
         super(manager);
         Painter.paintBase(this);

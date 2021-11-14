@@ -23,9 +23,9 @@ public class Banner extends KPanel {
     public Banner() {
         super();
         this.setPreferredSize(new Dimension(500, 45));
-        bannerText = new KLabel("lol", Fonts.bigTitleFont);
+        bannerText = new KLabel("", Fonts.bigTitleFont);
         this.add(bannerText, BorderLayout.CENTER);
-        this.setBackground(DiscordColor.pastelPurple.get());
+        this.setBackground(DiscordColor.darkPurple.get());
     }
 
     /**

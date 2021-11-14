@@ -77,6 +77,10 @@ public class SuiciderNode extends JButton {
         return name.equals("Kitsos");
     }
 
+    public String name() {
+        return name;
+    }
+
     public int centerX() {
         return location.x + BASE_NODE_SIZE / 2;
     }

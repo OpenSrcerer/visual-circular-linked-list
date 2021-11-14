@@ -8,8 +8,13 @@ import javax.swing.*;
  * A Discord-themed JSeparator.
  */
 public class KSeparator extends JSeparator {
+
     public KSeparator() {
-        super();
+        this(SwingConstants.HORIZONTAL);
+    }
+
+    public KSeparator(int swingConstant) {
+        super(swingConstant);
         this.setForeground(DiscordColor.blurple.get());
         this.setBackground(DiscordColor.blurple.get());
         this.setOpaque(true);
