@@ -1,5 +1,7 @@
 package personal.opensrcerer.ui.components.custom;
 
+import personal.opensrcerer.ui.components.custom.messages.FirstMessage;
+import personal.opensrcerer.ui.components.custom.messages.InvalidValue;
 import personal.opensrcerer.ui.styling.Painter;
 import personal.opensrcerer.util.NameGenerator;
 
@@ -11,27 +13,12 @@ import java.awt.*;
  * circular fashion.
  */
 public class NodeViewPort extends JLayeredPane {
-    public NodeViewPort(int nodes) {
+
+    public NodeViewPort() {
         this.setLayout(null);
         this.setPreferredSize(new Dimension(800,700));
         Painter.paintBase(this);
-
-        SuiciderNode[] nodesList = getNodesInCircle(
-                nodes,
-                300,
-                375,
-                300
-        );
-
-        for (SuiciderNode node : nodesList) {
-            this.add(node, 10);
-        }
-
-        SuiciderNode previous = nodesList[nodes - 1];
-        for (SuiciderNode node : nodesList) {
-            this.add(new Line(previous, node), 700);
-            previous = node;
-        }
+        add(FirstMessage.get());
     }
 
     public SuiciderNode[] getNodesInCircle(
@@ -55,5 +42,30 @@ public class NodeViewPort extends JLayeredPane {
             );
         }
         return nodesList;
+    }
+
+    public void setNodes(int nodes) {
+        if (nodes < 2) {
+            return;
+        }
+
+        this.removeAll();
+
+        SuiciderNode[] nodesList = getNodesInCircle(
+                nodes,
+                300,
+                375,
+                300
+        );
+
+        SuiciderNode previous = nodesList[nodes - 1];
+        for (SuiciderNode node : nodesList) {
+            this.add(node, 0);
+            this.add(new Line(previous, node), -1);
+            previous = node;
+        }
+
+        this.invalidate();
+        this.repaint();
     }
 }

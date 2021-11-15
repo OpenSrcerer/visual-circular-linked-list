@@ -2,6 +2,7 @@ package personal.opensrcerer.ui;
 
 import personal.opensrcerer.ui.components.custom.Banner;
 import personal.opensrcerer.ui.components.custom.NodeViewPort;
+import personal.opensrcerer.ui.components.events.FieldType;
 import personal.opensrcerer.ui.components.regular.*;
 import personal.opensrcerer.ui.styling.DiscordColor;
 import personal.opensrcerer.ui.styling.Fonts;
@@ -13,6 +14,12 @@ public abstract class WindowLayout {
 
     public static final Banner banner = new Banner();
 
+    public static final KTextField suiciderNumberField = new KTextField("", 5, FieldType.SUICIDERS);
+
+    public static final KTextField magicNumberField = new KTextField("", 5, FieldType.MAGIC_NUMBER);
+
+    public static final NodeViewPort viewportPane = new NodeViewPort();
+
     public static void set() {
         JPanel mainPanel = new KPanel(BoxLayout.PAGE_AXIS),
                 viewportWrapper = new KPanel(),
@@ -22,16 +29,15 @@ public abstract class WindowLayout {
                 inputWrapper = new KPanel(new FlowLayout(), DiscordColor.darkPurple),
                 borderWrapper = new KPanel(new BorderLayout(), DiscordColor.darkPurple);
 
-        NodeViewPort viewportPane = new NodeViewPort(30);
         viewportWrapper.add(viewportPane);
 
         leftFieldWrapper.add(new KLabel("Number of Suiciders", Fonts.titleFont));
         leftFieldWrapper.add(boxRigidArea(0, 5));
-        leftFieldWrapper.add(new KTextField("", 5));
+        leftFieldWrapper.add(suiciderNumberField);
 
         rightFieldWrapper.add(new KLabel("Magic Number", Fonts.titleFont));
         rightFieldWrapper.add(boxRigidArea(0, 5));
-        rightFieldWrapper.add(new KTextField("", 5));
+        rightFieldWrapper.add(magicNumberField);
 
         textFieldWrapper.add(leftFieldWrapper);
         textFieldWrapper.add(boxRigidArea(50, 0));

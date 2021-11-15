@@ -1,16 +1,16 @@
 package personal.opensrcerer.ui.components.events;
 
 import personal.opensrcerer.ui.UIConstants;
+import personal.opensrcerer.ui.components.regular.KTextField;
 
-import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class FieldKeyAdapter extends KeyAdapter {
+public class FieldKeyConstraintAdapter extends KeyAdapter {
 
-    private final JTextField field;
+    protected final KTextField field;
 
-    public FieldKeyAdapter(JTextField field) {
+    public FieldKeyConstraintAdapter(KTextField field) {
         this.field = field;
     }
 
