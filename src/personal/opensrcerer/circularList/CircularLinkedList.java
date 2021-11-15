@@ -149,10 +149,10 @@ public class CircularLinkedList<E> {
             return null;
         }
 
-        this.next(n);
+        this.next(n - 1);
         deleteCurrent();
         while (size() >= 1) {
-            this.next(n + 1);
+            this.next(n - 1);
             deleteCurrent();
         }
         return current.element;

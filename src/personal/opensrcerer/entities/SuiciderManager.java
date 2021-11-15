@@ -49,7 +49,7 @@ public class SuiciderManager extends CircularLinkedList<Suicider> {
         System.out.println("The group starts with:");
         this.display();
 
-        super.next(n);
+        super.next(n - 1);
         System.out.println(
                 super.getCurrentValue().getName() + " suicides first, in position " +
                 super.getCurrentValue().getPosition()
@@ -63,7 +63,7 @@ public class SuiciderManager extends CircularLinkedList<Suicider> {
                 break;
             }
 
-            super.next(n + 1);
+            super.next(n - 1);
 
             System.out.println(
                     super.getCurrentValue().getName() + " suicides, in position " +
