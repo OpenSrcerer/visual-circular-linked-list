@@ -45,11 +45,14 @@ public class NodeViewPort extends JLayeredPane {
     }
 
     public void setNodes(int nodes) {
-        if (nodes < 2) {
+        this.removeAll();
+
+        if (nodes < 2 || nodes > 50) {
+            this.add(InvalidValue.get());
+            this.invalidate();
+            this.repaint();
             return;
         }
-
-        this.removeAll();
 
         SuiciderNode[] nodesList = getNodesInCircle(
                 nodes,
@@ -65,6 +68,13 @@ public class NodeViewPort extends JLayeredPane {
             previous = node;
         }
 
+        this.invalidate();
+        this.repaint();
+    }
+
+    public void reset() {
+        this.removeAll();
+        this.add(FirstMessage.get());
         this.invalidate();
         this.repaint();
     }

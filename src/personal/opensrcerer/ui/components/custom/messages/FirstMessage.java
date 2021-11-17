@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FirstMessage extends KPanel {
-    public static FirstMessage firstMessage;
+    private static FirstMessage firstMessage;
 
     private static final String GUIDE_TEXT = "GUIDE LOL";
 

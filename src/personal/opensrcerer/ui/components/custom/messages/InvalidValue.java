@@ -7,8 +7,7 @@ import personal.opensrcerer.ui.styling.Fonts;
 import javax.swing.*;
 
 public class InvalidValue extends KPanel {
-
-    public static InvalidValue invalidValue;
+    private static InvalidValue invalidValue;
 
     private static final String INVALID_TEXT = "You have entered an invalid value!";
 

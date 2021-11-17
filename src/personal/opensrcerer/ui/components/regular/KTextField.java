@@ -1,8 +1,8 @@
 package personal.opensrcerer.ui.components.regular;
 
+import personal.opensrcerer.ui.components.events.FieldDocumentAdapter;
 import personal.opensrcerer.ui.components.events.FieldKeyConstraintAdapter;
 import personal.opensrcerer.ui.components.events.FieldMouseAdapter;
-import personal.opensrcerer.ui.components.events.FieldNumberUpdateAdapter;
 import personal.opensrcerer.ui.components.events.FieldType;
 import personal.opensrcerer.ui.styling.DiscordColor;
 import personal.opensrcerer.ui.styling.Fonts;
@@ -31,7 +31,7 @@ public class KTextField extends JTextField {
         this.setHorizontalAlignment(JTextField.CENTER);
         this.setCaretColor(DiscordColor.lightGray.get());
         this.addKeyListener(new FieldKeyConstraintAdapter(this));
-        this.addKeyListener(new FieldNumberUpdateAdapter(this));
+        this.getDocument().addDocumentListener(new FieldDocumentAdapter(this));
         this.addMouseListener(new FieldMouseAdapter(this));
     }
 }

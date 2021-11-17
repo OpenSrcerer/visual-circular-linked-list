@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 
 public class FieldKeyConstraintAdapter extends KeyAdapter {
 
-    protected final KTextField field;
+    private final KTextField field;
 
     public FieldKeyConstraintAdapter(KTextField field) {
         this.field = field;
@@ -16,7 +16,7 @@ public class FieldKeyConstraintAdapter extends KeyAdapter {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        if (field.getText().length() >= UIConstants.FIELD_CHARACTER_LIMIT) {
+        if (field.getText().length() + 1 > UIConstants.FIELD_CHARACTER_LIMIT) {
             e.consume();
         }
     }
