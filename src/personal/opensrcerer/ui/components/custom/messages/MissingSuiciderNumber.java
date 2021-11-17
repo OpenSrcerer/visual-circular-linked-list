@@ -6,22 +6,22 @@ import personal.opensrcerer.ui.styling.Fonts;
 
 import javax.swing.*;
 
-public class InvalidValue extends KPanel {
-    private static InvalidValue invalidValue;
+public class MissingSuiciderNumber extends KPanel {
+    private static MissingSuiciderNumber missingSuiciderNumber;
 
-    private static final String TEXT = "You have entered an invalid value!";
+    private static final String TEXT = "Missing Suicider Number";
 
-    private InvalidValue() {
+    public MissingSuiciderNumber() {
         super(BoxLayout.PAGE_AXIS);
         this.setLocation(50, 250);
         this.setSize(700, 200);
         this.add(new KLabel(TEXT, Fonts.bigTitleFont));
     }
 
-    public static InvalidValue get() {
-        if (invalidValue == null) {
-            invalidValue = new InvalidValue();
+    public static MissingSuiciderNumber get() {
+        if (missingSuiciderNumber == null) {
+            missingSuiciderNumber = new MissingSuiciderNumber();
         }
-        return invalidValue;
+        return missingSuiciderNumber;
     }
 }

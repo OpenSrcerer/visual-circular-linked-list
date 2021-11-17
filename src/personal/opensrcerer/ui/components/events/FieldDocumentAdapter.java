@@ -1,5 +1,6 @@
 package personal.opensrcerer.ui.components.events;
 
+import personal.opensrcerer.entities.SuiciderManager;
 import personal.opensrcerer.ui.WindowLayout;
 import personal.opensrcerer.ui.components.regular.KTextField;
 
@@ -32,6 +33,12 @@ public class FieldDocumentAdapter implements DocumentListener {
     private void updateNodes() {
         if (this.field.getText().isBlank()) {
             WindowLayout.viewportPane.reset();
+
+            if (this.field.type.equals(FieldType.SUICIDERS)) {
+                SuiciderManager.setValues(null, SuiciderManager.getMagicNumber());
+            } else {
+                SuiciderManager.setValues(SuiciderManager.getSuiciderNodes(), null);
+            }
             return;
         }
 
@@ -41,8 +48,7 @@ public class FieldDocumentAdapter implements DocumentListener {
             if (value < 2) {
                 throw new NumberFormatException();
             }
-
-            if (value > 50) {
+            if (value > 40) {
                 throw new NumberFormatException();
             }
         } catch (Exception ex) {
@@ -50,8 +56,9 @@ public class FieldDocumentAdapter implements DocumentListener {
         }
 
         if (this.field.type.equals(FieldType.SUICIDERS)) {
-            WindowLayout.viewportPane.setNodes(value);
+            SuiciderManager.setValues(value, SuiciderManager.getMagicNumber());
+        } else {
+            SuiciderManager.setValues(SuiciderManager.getSuiciderNodes(), value);
         }
-        System.out.println(field.getText());
     }
 }

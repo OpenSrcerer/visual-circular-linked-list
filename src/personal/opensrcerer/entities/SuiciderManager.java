@@ -2,11 +2,16 @@ package personal.opensrcerer.entities;
 
 import personal.opensrcerer.circularList.CircularLinkedList;
 import personal.opensrcerer.circularList.CircularNode;
+import personal.opensrcerer.ui.WindowLayout;
 
 /**
  * A specialized CircularLinkedList that displays output about some of its operations.
  */
 public class SuiciderManager extends CircularLinkedList<Suicider> {
+
+    private static Integer suiciderNodes = null;
+
+    private static Integer magicNumber = null;
 
     private static SuiciderManager manager = null;
 
@@ -15,6 +20,29 @@ public class SuiciderManager extends CircularLinkedList<Suicider> {
             manager = new SuiciderManager();
         }
         return manager;
+    }
+
+    public static void setValues(Integer suiciderNodes, Integer magicNumber) {
+        SuiciderManager.suiciderNodes = suiciderNodes;
+        SuiciderManager.magicNumber = magicNumber;
+
+        if (suiciderNodes == null && magicNumber == null) {
+            WindowLayout.viewportPane.reset();
+        } else if (suiciderNodes != null && magicNumber != null) {
+            WindowLayout.viewportPane.setNodes(suiciderNodes);
+        } else if (suiciderNodes == null) {
+            WindowLayout.viewportPane.setMissingSuiciderNumber();
+        } else {
+            WindowLayout.viewportPane.setMissingMagicNumber();
+        }
+    }
+
+    public static Integer getSuiciderNodes() {
+        return suiciderNodes;
+    }
+
+    public static Integer getMagicNumber() {
+        return magicNumber;
     }
 
     /**

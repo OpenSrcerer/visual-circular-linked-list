@@ -2,6 +2,8 @@ package personal.opensrcerer.ui.components.custom;
 
 import personal.opensrcerer.ui.components.custom.messages.FirstMessage;
 import personal.opensrcerer.ui.components.custom.messages.InvalidValue;
+import personal.opensrcerer.ui.components.custom.messages.MissingMagicNumber;
+import personal.opensrcerer.ui.components.custom.messages.MissingSuiciderNumber;
 import personal.opensrcerer.ui.styling.Painter;
 import personal.opensrcerer.util.NameGenerator;
 
@@ -49,8 +51,7 @@ public class NodeViewPort extends JLayeredPane {
 
         if (nodes < 2 || nodes > 50) {
             this.add(InvalidValue.get());
-            this.invalidate();
-            this.repaint();
+            this.refresh();
             return;
         }
 
@@ -68,13 +69,28 @@ public class NodeViewPort extends JLayeredPane {
             previous = node;
         }
 
-        this.invalidate();
-        this.repaint();
+        this.refresh();
+    }
+
+    public void setMissingMagicNumber() {
+        this.removeAll();
+        this.add(MissingMagicNumber.get());
+        this.refresh();
+    }
+
+    public void setMissingSuiciderNumber() {
+        this.removeAll();
+        this.add(MissingSuiciderNumber.get());
+        this.refresh();
     }
 
     public void reset() {
         this.removeAll();
         this.add(FirstMessage.get());
+        this.refresh();
+    }
+
+    private void refresh() {
         this.invalidate();
         this.repaint();
     }
