@@ -1,7 +1,6 @@
 package personal.opensrcerer.entities;
 
 import personal.opensrcerer.circularList.CircularLinkedList;
-import personal.opensrcerer.circularList.CircularNode;
 import personal.opensrcerer.ui.WindowLayout;
 import personal.opensrcerer.util.NameGenerator;
 
@@ -15,6 +14,10 @@ public class SuiciderManager extends CircularLinkedList<Suicider> {
     private static Integer magicNumber = null;
 
     private static SuiciderManager manager = null;
+
+    private static int[] snapshots = null;
+
+    private static int currentStep;
 
     public static SuiciderManager getInstance() {
         if (manager == null) {
@@ -39,11 +42,11 @@ public class SuiciderManager extends CircularLinkedList<Suicider> {
     }
 
     public Suicider[] getListOfNodes() {
-        manager.clear();
+        CircularLinkedList<Suicider> suiciderList = new CircularLinkedList<>();
         for (int index = 0; index < suiciderNodes; ++index) {
-           manager.add(new Suicider(index + 1, ""));
+           suiciderList.add(new Suicider(index + 1, ""));
         }
-        int kitsosPosition = manager.removeUntilLast(getMagicNumber()).getPosition();
+        int kitsosPosition = suiciderList.removeUntilLast(getMagicNumber()).getPosition();
 
         WindowLayout.banner.setAnnouncement("Kitsos should stay in position " + kitsosPosition + ".");
         NameGenerator.refillNames();
@@ -60,6 +63,9 @@ public class SuiciderManager extends CircularLinkedList<Suicider> {
             manager.add(suiciderToAdd);
             suiciders[index] = suiciderToAdd;
         }
+        snapshots = manager.getSuicideSnapshots(getMagicNumber());
+        currentStep = snapshots.length - 1;
+
         return suiciders;
     }
 
@@ -71,63 +77,37 @@ public class SuiciderManager extends CircularLinkedList<Suicider> {
         return magicNumber;
     }
 
-    /**
-     * Display the contents of the list.
-     */
-    public void display() {
-        CircularNode<Suicider> starting = super.firstElement;
-        CircularNode<Suicider> curr = super.firstElement;
-
-        int printCounter = 1;
-        do {
-            System.out.print(curr.getElement().getName() + "(" + curr.getElement().getPosition() + ")->");
-            if (printCounter % 5 == 0) {
-                System.out.println();
-            }
-            curr = curr.getNext();
-            ++printCounter;
-        } while (!curr.equals(starting));
-        if (printCounter % 5 == 0) {
-            System.out.println();
-        } else {
-            System.out.println("\n");
-        }
+    public static int getSnapshot() {
+        return snapshots[currentStep];
     }
 
-    @Override
-    public Suicider removeUntilLast(int n) {
+    public static void setCurrentStep(int currentStep) {
+        if (currentStep < 0) {
+            currentStep = 0;
+        } else if (currentStep >= snapshots.length) {
+            currentStep = snapshots.length - 1;
+        }
+
+        SuiciderManager.currentStep = currentStep;
+    }
+
+    public static int getCurrentStep() {
+        return currentStep;
+    }
+
+    private int[] getSuicideSnapshots(int n) {
         if (super.size() <= 1) {
             return null;
         }
 
-        System.out.println("The group starts with:");
-        this.display();
+        int originalSize = super.size();
+        int[] suicides = new int[originalSize - 1];
 
-        super.next(n - 1);
-        System.out.println(
-                super.getCurrentValue().getName() + " suicides first, in position " +
-                super.getCurrentValue().getPosition()
-        );
-        super.deleteCurrent();
-        this.display();
-        while (super.size() >= 1) {
-
-            if (super.size() == 1) {
-                System.out.println("Now only Kitsos remains, in position " + getCurrentValue().getPosition());
-                break;
-            }
-
+        for (int index = 0; index < originalSize - 1; ++index) {
             super.next(n - 1);
-
-            System.out.println(
-                    super.getCurrentValue().getName() + " suicides, in position " +
-                    super.getCurrentValue().getPosition()
-            );
+            suicides[index] = this.getCurrentValue().getPosition();
             super.deleteCurrent();
-
-            System.out.println("These individuals remain:");
-            this.display();
         }
-        return super.getCurrentValue();
+        return suicides;
     }
 }

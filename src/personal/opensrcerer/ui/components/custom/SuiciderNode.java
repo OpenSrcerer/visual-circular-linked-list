@@ -31,7 +31,7 @@ public class SuiciderNode extends JButton {
         this.location = new Point(x, y);
 
         this.hover = false;
-        this.outlineColor = isKitsos() ? DiscordColor.idle : DiscordColor.blurple;
+        this.outlineColor = isKitsos() ? DiscordColor.online : DiscordColor.blurple;
         this.setLocation(x, y);
         this.setSize(NODE_FULL_SIZE, NODE_FULL_SIZE);
         this.setContentAreaFilled(false);
@@ -116,6 +116,10 @@ public class SuiciderNode extends JButton {
 
     public void setOutlineColor(DiscordColor outlineColor) {
         this.outlineColor = outlineColor;
+    }
+
+    public void revive() {
+        this.dead = false;
     }
 
     public void kill() {

@@ -5,9 +5,6 @@ import java.awt.*;
 /**
  * This class is used to paint components with predefined colors
  * to match the ambiance and theme of the UI.
- *
- * Note: Any mention of "custom" in the methods of this class
- * refers to the description above.
  */
 public abstract class Painter {
     public static final Stroke DASHED_LINE_STROKE = new BasicStroke(

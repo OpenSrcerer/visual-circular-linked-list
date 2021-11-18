@@ -30,7 +30,7 @@ public class NodeMouseAdapter extends MouseAdapter {
     public void mouseExited(MouseEvent e) {
         Window.contentPane().setCursor(Cursor.getDefaultCursor());
         WindowLayout.banner.update();
-        node.setOutlineColor((node.isKitsos()) ? DiscordColor.idle : DiscordColor.blurple);
+        node.setOutlineColor((node.isKitsos()) ? DiscordColor.online : DiscordColor.blurple);
         node.setHover(false);
         node.refresh();
     }

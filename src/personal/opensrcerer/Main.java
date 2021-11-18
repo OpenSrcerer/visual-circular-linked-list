@@ -6,11 +6,7 @@
 
 package personal.opensrcerer;
 
-import personal.opensrcerer.circularList.CircularLinkedList;
-import personal.opensrcerer.entities.Suicider;
-import personal.opensrcerer.entities.SuiciderManager;
 import personal.opensrcerer.ui.Window;
-import personal.opensrcerer.util.NameGenerator;
 
 import javax.swing.*;
 
@@ -19,7 +15,7 @@ import javax.swing.*;
  */
 public class Main {
     /**
-     * Flag to check if look and feel change was successful.
+     * Flag to check whether look and feel change was successful.
      */
     private static boolean lookAndFeelSuccessful = false;
 
@@ -33,7 +29,7 @@ public class Main {
         // Try to set the UI look and feel to match the system
         setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         if (!lookAndFeelSuccessful)
-            // Revert to a cross platform version
+            // Revert to a cross-platform version
             setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 
         if (!lookAndFeelSuccessful)
@@ -54,76 +50,5 @@ public class Main {
         } catch (Exception ex) {
             System.out.println("Look and feel is unsupported.");
         }
-    }
-
-    /**
-     * Default main method.
-     * @param args Arguments for default main method.
-     */
-    /*public static void main(String[] args) {
-        runProgram();
-    }*/
-
-    /**
-     * The method that takes in input and executes
-     * the relevant method of the list.
-     */
-    private static void runProgram() {
-        System.out.print("""
-                Welcome to Kitsos' life-saving program.
-                Please begin by entering the number of individuals
-                that will commit suicide:
-                """);
-        int suiciders = getNumberInput(true);
-        System.out.print("""
-                Great! Now please insert the magic number you have
-                chosen for the suicides:
-                """);
-        int magicNumber = getNumberInput(false);
-
-        CircularLinkedList<Suicider> list = new CircularLinkedList<>();
-        for (int i = 1; i <= suiciders; ++i) {
-            list.add(new Suicider(i, ""));
-        }
-        // Run the program initially once to get Kitsos' position for name display
-        int kitsosPosition = list.removeUntilLast(magicNumber).getPosition();
-
-        list = new SuiciderManager();
-        for (int i = 1; i <= suiciders; ++i) {
-            if (i == kitsosPosition) {
-                list.add(new Suicider(i, "Kitsos"));
-                continue;
-            }
-            list.add(new Suicider(i, NameGenerator.getRandomName()));
-        }
-        System.out.println("The position Kitsos should stay in is: "
-                + list.removeUntilLast(magicNumber).getPosition());
-    }
-
-    /**
-     * A wrapper method to handle exceptions and parse numbers.
-     * @param suiciders Whether the method is parsing the number of suiciders.
-     * @return A parsed integer.
-     */
-    private static int getNumberInput(boolean suiciders) {
-        int parsedInput = 0;
-        while (parsedInput <= 0) {
-            try {
-
-                if (suiciders && parsedInput == 1) {
-                    System.out.println("Why don't you just run away then?");
-                    throw new NumberFormatException();
-                }
-
-                if (suiciders && parsedInput > 200) {
-                    System.out.println("The number of suiciders is limited to 200 due to name generation limitations.");
-                    throw new NumberFormatException();
-                }
-            } catch (Exception ex) {
-                parsedInput = 0;
-                System.out.println("Please try again, but enter a valid integer this time.");
-            }
-        }
-        return parsedInput;
     }
 }

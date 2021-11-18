@@ -2,6 +2,7 @@ package personal.opensrcerer.ui;
 
 import personal.opensrcerer.ui.components.custom.Banner;
 import personal.opensrcerer.ui.components.custom.NodeViewPort;
+import personal.opensrcerer.ui.components.events.ButtonType;
 import personal.opensrcerer.ui.components.events.FieldType;
 import personal.opensrcerer.ui.components.regular.*;
 import personal.opensrcerer.ui.styling.DiscordColor;
@@ -45,9 +46,9 @@ public abstract class WindowLayout {
 
         inputWrapper.add(textFieldWrapper);
 
-        borderWrapper.add(new KButton("Previous"), BorderLayout.WEST);
+        borderWrapper.add(new KButton("Previous", ButtonType.NEXT), BorderLayout.WEST);
         borderWrapper.add(inputWrapper, BorderLayout.CENTER);
-        borderWrapper.add(new KButton("Next"), BorderLayout.EAST);
+        borderWrapper.add(new KButton("Next", ButtonType.PREVIOUS), BorderLayout.EAST);
 
         mainPanel.add(banner);
         mainPanel.add(new KSeparator());

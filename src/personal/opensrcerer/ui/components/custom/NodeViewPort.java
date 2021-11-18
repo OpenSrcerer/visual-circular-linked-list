@@ -2,22 +2,26 @@ package personal.opensrcerer.ui.components.custom;
 
 import personal.opensrcerer.entities.Suicider;
 import personal.opensrcerer.entities.SuiciderManager;
+import personal.opensrcerer.ui.UIConstants;
 import personal.opensrcerer.ui.WindowLayout;
 import personal.opensrcerer.ui.components.custom.messages.FirstMessage;
 import personal.opensrcerer.ui.components.custom.messages.InvalidValue;
 import personal.opensrcerer.ui.components.custom.messages.MissingMagicNumber;
 import personal.opensrcerer.ui.components.custom.messages.MissingSuiciderNumber;
 import personal.opensrcerer.ui.styling.Painter;
-import personal.opensrcerer.util.NameGenerator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A custom pane that is designated to display the nodes in a
  * circular fashion.
  */
 public class NodeViewPort extends JLayeredPane {
+
+    private final Map<Integer, SuiciderNode> suiciderMap = new HashMap<>();
 
     public NodeViewPort() {
         this.setLayout(null);
@@ -40,17 +44,14 @@ public class NodeViewPort extends JLayeredPane {
 
         SuiciderManager manager = SuiciderManager.getInstance();
         manager.clear();
-        Suicider[] suiciders = manager.getListOfNodes();
+        this.suiciderMap.clear();
 
-        SuiciderNode[] nodesList = getNodesInCircle(
-                suiciders,
-                300,
-                375,
-                300
-        );
+        Suicider[] suiciders = manager.getListOfNodes();
+        SuiciderNode[] nodesList = getNodesInCircle(suiciders);
 
         SuiciderNode previous = nodesList[nodes - 1];
         for (SuiciderNode node : nodesList) {
+            this.suiciderMap.put(node.position(), node);
             this.add(node, 0);
             this.add(new Line(previous, node), -1);
             previous = node;
@@ -60,30 +61,20 @@ public class NodeViewPort extends JLayeredPane {
         this.refresh();
     }
 
-    public SuiciderNode[] getNodesInCircle(
-            Suicider[] suiciders,
-            double circleRadius,
-            int biasX,
-            int biasY
-    ) {
-        SuiciderNode[] nodesList = new SuiciderNode[suiciders.length];
-        double theta = 360d / suiciders.length;
+    public void nextStep() {
+        SuiciderManager.setCurrentStep(SuiciderManager.getCurrentStep() + 1);
+        int nodeToKillPosition = SuiciderManager.getSnapshot();
+        SuiciderNode node = suiciderMap.get(nodeToKillPosition);
+        node.kill();
+        node.refresh();
+    }
 
-        for (int index = 0; index < suiciders.length; ++index) {
-            double thetaRadians = Math.toRadians(theta * index);
-            int x = (int) (circleRadius * Math.cos(thetaRadians));
-            int y = (int) (circleRadius * Math.sin(thetaRadians));
-
-            nodesList[index] = new SuiciderNode(
-                    biasX + x,
-                    biasY + y,
-                    suiciders[index]
-            );
-            if (!nodesList[index].isKitsos()) {
-                nodesList[index].kill();
-            }
-        }
-        return nodesList;
+    public void previousStep() {
+        SuiciderManager.setCurrentStep(SuiciderManager.getCurrentStep() - 1);
+        int nodeToRevivePosition = SuiciderManager.getSnapshot();
+        SuiciderNode node = suiciderMap.get(nodeToRevivePosition);
+        node.revive();
+        node.refresh();
     }
 
     public void setMissingMagicNumber() {
@@ -107,5 +98,26 @@ public class NodeViewPort extends JLayeredPane {
     private void refresh() {
         this.invalidate();
         this.repaint();
+    }
+
+    private SuiciderNode[] getNodesInCircle(Suicider[] suiciders) {
+        SuiciderNode[] nodesList = new SuiciderNode[suiciders.length];
+        double theta = 360d / suiciders.length;
+
+        for (int index = 0; index < suiciders.length; ++index) {
+            double thetaRadians = Math.toRadians(theta * index);
+            int x = (int) (UIConstants.NODE_CIRCLE_RADIUS * Math.cos(thetaRadians));
+            int y = (int) (UIConstants.NODE_CIRCLE_RADIUS * Math.sin(thetaRadians));
+
+            nodesList[index] = new SuiciderNode(
+                    UIConstants.NODE_CIRCLE_BIAS_X + x,
+                    UIConstants.NODE_CIRCLE_BIAS_Y + y,
+                    suiciders[index]
+            );
+            if (!nodesList[index].isKitsos()) {
+                nodesList[index].kill();
+            }
+        }
+        return nodesList;
     }
 }
