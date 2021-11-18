@@ -15,7 +15,8 @@ public enum DiscordColor {
     purple(new Color(138, 43, 226)),
     darkPurple(new Color(60, 48, 73)),
     idle(new Color(250, 166, 26)),
-    dnd(new Color(240, 71, 71));
+    dndTransparent(new Color(1f, 0f, 0f, 0.75f)),
+    dndMoreTransparent(new Color(1f, 0f, 0f, 0.35f));
 
     private final Color color;
 

@@ -16,12 +16,12 @@ public class Line extends JPanel {
         this.setSize(1000, 1000);
         this.setBackground(Color.RED);
         this.origin = new Point(
-                origin.centerX() + UIConstants.STROKE_NODE_OFFSET,
-                origin.centerY() + UIConstants.STROKE_NODE_OFFSET
+                origin.centerX() + UIConstants.NODE_STROKE_OFFSET,
+                origin.centerY() + UIConstants.NODE_STROKE_OFFSET
         );
         this.target = new Point(
-                target.centerX() + UIConstants.STROKE_NODE_OFFSET,
-                target.centerY() + UIConstants.STROKE_NODE_OFFSET
+                target.centerX() + UIConstants.NODE_STROKE_OFFSET,
+                target.centerY() + UIConstants.NODE_STROKE_OFFSET
         );
         this.setForeground(DiscordColor.blurple.get());
     }

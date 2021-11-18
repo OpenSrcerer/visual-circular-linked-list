@@ -26,6 +26,13 @@ public abstract class Painter {
             10.0f
     );
 
+    public static final Stroke NODE_STROKE_KITSOS = new BasicStroke(
+            3.5f,
+            BasicStroke.CAP_BUTT,
+            BasicStroke.JOIN_MITER,
+            10.0f
+    );
+
     /**
      * Paints the base colors of any component.
      * @param component Component to paint.

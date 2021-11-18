@@ -45,14 +45,14 @@ public class FieldDocumentAdapter implements DocumentListener {
         int value;
         try {
             value = Integer.parseInt(this.field.getText());
-            if (value < 2) {
+            if (value < 1 || value < 2 && this.field.type.equals(FieldType.SUICIDERS)) {
                 throw new NumberFormatException();
             }
-            if (value > 40) {
+            if (value > 40 && this.field.type.equals(FieldType.SUICIDERS)) {
                 throw new NumberFormatException();
             }
         } catch (Exception ex) {
-            value = 1;
+            value = 0;
         }
 
         if (this.field.type.equals(FieldType.SUICIDERS)) {

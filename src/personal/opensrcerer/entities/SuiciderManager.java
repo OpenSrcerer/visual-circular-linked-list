@@ -3,6 +3,7 @@ package personal.opensrcerer.entities;
 import personal.opensrcerer.circularList.CircularLinkedList;
 import personal.opensrcerer.circularList.CircularNode;
 import personal.opensrcerer.ui.WindowLayout;
+import personal.opensrcerer.util.NameGenerator;
 
 /**
  * A specialized CircularLinkedList that displays output about some of its operations.
@@ -29,12 +30,37 @@ public class SuiciderManager extends CircularLinkedList<Suicider> {
         if (suiciderNodes == null && magicNumber == null) {
             WindowLayout.viewportPane.reset();
         } else if (suiciderNodes != null && magicNumber != null) {
-            WindowLayout.viewportPane.setNodes(suiciderNodes);
+            WindowLayout.viewportPane.setNodes();
         } else if (suiciderNodes == null) {
             WindowLayout.viewportPane.setMissingSuiciderNumber();
         } else {
             WindowLayout.viewportPane.setMissingMagicNumber();
         }
+    }
+
+    public Suicider[] getListOfNodes() {
+        manager.clear();
+        for (int index = 0; index < suiciderNodes; ++index) {
+           manager.add(new Suicider(index + 1, ""));
+        }
+        int kitsosPosition = manager.removeUntilLast(getMagicNumber()).getPosition();
+
+        WindowLayout.banner.setAnnouncement("Kitsos should stay in position " + kitsosPosition + ".");
+        NameGenerator.refillNames();
+        manager.clear();
+
+        Suicider[] suiciders = new Suicider[suiciderNodes];
+        for (int index = 0; index < suiciderNodes; ++index) {
+            Suicider suiciderToAdd;
+            if (index + 1 == kitsosPosition) {
+                suiciderToAdd = new Suicider(index + 1, "Kitsos");
+            } else {
+                suiciderToAdd = new Suicider(index + 1, NameGenerator.getRandomName());
+            }
+            manager.add(suiciderToAdd);
+            suiciders[index] = suiciderToAdd;
+        }
+        return suiciders;
     }
 
     public static Integer getSuiciderNodes() {
@@ -95,7 +121,7 @@ public class SuiciderManager extends CircularLinkedList<Suicider> {
 
             System.out.println(
                     super.getCurrentValue().getName() + " suicides, in position " +
-                            super.getCurrentValue().getPosition()
+                    super.getCurrentValue().getPosition()
             );
             super.deleteCurrent();
 

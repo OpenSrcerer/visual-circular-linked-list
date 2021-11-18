@@ -13,6 +13,11 @@ import java.awt.*;
 public class Banner extends KPanel {
 
     /**
+     * The text that displays which position Kitsos should stay in.
+     */
+    private String announcement = "";
+
+    /**
      * The label that contains this banner's text.
      */
     private final KLabel bannerText;
@@ -35,7 +40,31 @@ public class Banner extends KPanel {
     public void update(String text) {
         // Show the round message if the current player is not a bot.
         bannerText.setText(text);
-        revalidate();
-        repaint();
+        this.refresh();
+    }
+
+    /**
+     * Reset the banner to the announcement message.
+     */
+    public void update() {
+        bannerText.setText(this.announcement);
+        this.refresh();
+    }
+
+    /**
+     * Set the announcement message.
+     * @param announcement Message to set.
+     */
+    public void setAnnouncement(String announcement) {
+        this.announcement = announcement;
+        this.refresh();
+    }
+
+    /**
+     * Revalidate & repaint this component.
+     */
+    private void refresh() {
+        this.revalidate();
+        this.repaint();
     }
 }

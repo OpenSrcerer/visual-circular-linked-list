@@ -157,4 +157,13 @@ public class CircularLinkedList<E> {
         }
         return current.element;
     }
+
+    /**
+     * Remove all the elements in this list.
+     */
+    public void clear() {
+        this.firstElement = null;
+        this.current = null;
+        this.previous = null;
+    }
 }

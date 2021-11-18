@@ -12,7 +12,7 @@ public enum Fonts {
     /**
      * Font used for nodes
      */
-    nodeFont(new Font("Century Gothic", Font.BOLD, 25)),
+    nodeFont(new Font("Courier", Font.BOLD, 30)),
 
     /**
      * Used for large buttons, etc.

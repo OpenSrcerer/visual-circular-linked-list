@@ -1,5 +1,8 @@
 package personal.opensrcerer.ui.components.custom;
 
+import personal.opensrcerer.entities.Suicider;
+import personal.opensrcerer.entities.SuiciderManager;
+import personal.opensrcerer.ui.WindowLayout;
 import personal.opensrcerer.ui.components.custom.messages.FirstMessage;
 import personal.opensrcerer.ui.components.custom.messages.InvalidValue;
 import personal.opensrcerer.ui.components.custom.messages.MissingMagicNumber;
@@ -23,40 +26,24 @@ public class NodeViewPort extends JLayeredPane {
         add(FirstMessage.get());
     }
 
-    public SuiciderNode[] getNodesInCircle(
-            int nodes,
-            double circleRadius,
-            int biasX,
-            int biasY
-    ) {
-        SuiciderNode[] nodesList = new SuiciderNode[nodes];
-        double theta = 360d / nodes;
-
-        for (int index = 0; index < nodes; ++index) {
-            double thetaRadians = Math.toRadians(theta * index);
-            int x = (int) (circleRadius * Math.cos(thetaRadians));
-            int y = (int) (circleRadius * Math.sin(thetaRadians));
-
-            nodesList[index] = new SuiciderNode(
-                    biasX + x,
-                    biasY + y,
-                    NameGenerator.getRandomName()
-            );
-        }
-        return nodesList;
-    }
-
-    public void setNodes(int nodes) {
+    public void setNodes() {
         this.removeAll();
 
-        if (nodes < 2 || nodes > 50) {
+        int nodes = SuiciderManager.getSuiciderNodes();
+        int magicNumber = SuiciderManager.getMagicNumber();
+
+        if (magicNumber < 1 || (nodes < 2 || nodes > 40)) {
             this.add(InvalidValue.get());
             this.refresh();
             return;
         }
 
+        SuiciderManager manager = SuiciderManager.getInstance();
+        manager.clear();
+        Suicider[] suiciders = manager.getListOfNodes();
+
         SuiciderNode[] nodesList = getNodesInCircle(
-                nodes,
+                suiciders,
                 300,
                 375,
                 300
@@ -69,7 +56,34 @@ public class NodeViewPort extends JLayeredPane {
             previous = node;
         }
 
+        WindowLayout.banner.update();
         this.refresh();
+    }
+
+    public SuiciderNode[] getNodesInCircle(
+            Suicider[] suiciders,
+            double circleRadius,
+            int biasX,
+            int biasY
+    ) {
+        SuiciderNode[] nodesList = new SuiciderNode[suiciders.length];
+        double theta = 360d / suiciders.length;
+
+        for (int index = 0; index < suiciders.length; ++index) {
+            double thetaRadians = Math.toRadians(theta * index);
+            int x = (int) (circleRadius * Math.cos(thetaRadians));
+            int y = (int) (circleRadius * Math.sin(thetaRadians));
+
+            nodesList[index] = new SuiciderNode(
+                    biasX + x,
+                    biasY + y,
+                    suiciders[index]
+            );
+            if (!nodesList[index].isKitsos()) {
+                nodesList[index].kill();
+            }
+        }
+        return nodesList;
     }
 
     public void setMissingMagicNumber() {
