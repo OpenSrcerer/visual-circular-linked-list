@@ -16,8 +16,17 @@ public class FieldKeyConstraintAdapter extends KeyAdapter {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        if (field.getText().length() + 1 > UIConstants.FIELD_CHARACTER_LIMIT) {
-            e.consume();
+        switch (field.type) {
+            case SUICIDERS -> {
+                if (field.getText().length() + 1 > UIConstants.SUICIDER_NUMBER_FIELD_CHARACTER_LIMIT) {
+                    e.consume();
+                }
+            }
+            case MAGIC_NUMBER -> {
+                if (field.getText().length() + 1 > UIConstants.MAGIC_NUMBER_FIELD_CHARACTER_LIMIT) {
+                    e.consume();
+                }
+            }
         }
     }
 }

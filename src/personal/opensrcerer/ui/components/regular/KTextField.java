@@ -27,7 +27,7 @@ public class KTextField extends JTextField {
         Painter.paintBase(this);
         this.type = type;
         this.setMaximumSize(new Dimension(100, 50));
-        this.setFont(Fonts.actionFont.get());
+        this.setFont(Fonts.textFieldFont.get());
         this.setHorizontalAlignment(JTextField.CENTER);
         this.setCaretColor(DiscordColor.lightGray.get());
         this.addKeyListener(new FieldKeyConstraintAdapter(this));

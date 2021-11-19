@@ -2,7 +2,7 @@ package personal.opensrcerer.ui.components.custom;
 
 import personal.opensrcerer.ui.UIConstants;
 import personal.opensrcerer.ui.styling.DiscordColor;
-import personal.opensrcerer.ui.styling.Painter;
+import personal.opensrcerer.ui.styling.Strokes;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +31,7 @@ public class Line extends JPanel {
         Graphics2D g2d = (Graphics2D) graphics;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setStroke(Painter.DASHED_LINE_STROKE);
+        g2d.setStroke(Strokes.DASHED_LINE_STROKE.get());
         g2d.drawLine(origin.x, origin.y, target.x, target.y);
     }
 }

@@ -1,6 +1,6 @@
 package personal.opensrcerer.ui.components.events;
 
-import personal.opensrcerer.entities.SuiciderManager;
+import personal.opensrcerer.entities.SuicideManager;
 import personal.opensrcerer.ui.WindowLayout;
 import personal.opensrcerer.ui.components.regular.KTextField;
 
@@ -35,9 +35,9 @@ public class FieldDocumentAdapter implements DocumentListener {
             WindowLayout.viewportPane.reset();
 
             if (this.field.type.equals(FieldType.SUICIDERS)) {
-                SuiciderManager.setValues(null, SuiciderManager.getMagicNumber());
+                SuicideManager.setValues(null, SuicideManager.getMagicNumber());
             } else {
-                SuiciderManager.setValues(SuiciderManager.getSuiciderNodes(), null);
+                SuicideManager.setValues(SuicideManager.getSuiciderNodes(), null);
             }
             return;
         }
@@ -56,9 +56,9 @@ public class FieldDocumentAdapter implements DocumentListener {
         }
 
         if (this.field.type.equals(FieldType.SUICIDERS)) {
-            SuiciderManager.setValues(value, SuiciderManager.getMagicNumber());
+            SuicideManager.setValues(value, SuicideManager.getMagicNumber());
         } else {
-            SuiciderManager.setValues(SuiciderManager.getSuiciderNodes(), value);
+            SuicideManager.setValues(SuicideManager.getSuiciderNodes(), value);
         }
     }
 }

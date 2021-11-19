@@ -9,8 +9,10 @@ package personal.opensrcerer.circularList;
 import java.util.Arrays;
 
 /**
- * An implementation of a Circular Linked List that is used in this project to pass turns in a circular fashion.
- * The structure of the List is generified to maintain compatibility but in the project, the Type argument E is a Player object.
+ * An implementation of a Circular Linked List that is
+ * used in this project to pass turns in a circular fashion.
+ * The structure of the List is generified to demonstrate
+ * the flexibility of this data structure.
  * @param <E> The type of data that this list contains.
  */
 public class CircularLinkedList<E> {
@@ -148,9 +150,6 @@ public class CircularLinkedList<E> {
         if (size() <= 1) {
             return null;
         }
-
-        this.next(n - 1);
-        deleteCurrent();
         while (size() >= 1) {
             this.next(n - 1);
             deleteCurrent();
@@ -162,6 +161,7 @@ public class CircularLinkedList<E> {
      * Remove all the elements in this list.
      */
     public void clear() {
+        this.size = 0;
         this.firstElement = null;
         this.current = null;
         this.previous = null;

@@ -1,5 +1,6 @@
 package personal.opensrcerer.ui.components.events;
 
+import personal.opensrcerer.entities.SuicideManager;
 import personal.opensrcerer.ui.WindowLayout;
 
 import java.awt.event.ActionEvent;
@@ -15,10 +16,15 @@ public class ButtonClickAdapter implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (SuicideManager.getInstance().size() == 0) {
+            return;
+        }
+
         switch (type) {
-            case NEXT -> WindowLayout.viewportPane.previousStep();
-            case PREVIOUS -> WindowLayout.viewportPane.nextStep();
-            case SNAPSHOT -> {}
+            case FIRST -> WindowLayout.viewportPane.first();
+            case PREVIOUS -> WindowLayout.viewportPane.previousStep();
+            case NEXT -> WindowLayout.viewportPane.nextStep();
+            case LAST -> WindowLayout.viewportPane.last();
         }
     }
 }

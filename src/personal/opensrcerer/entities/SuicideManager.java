@@ -2,33 +2,34 @@ package personal.opensrcerer.entities;
 
 import personal.opensrcerer.circularList.CircularLinkedList;
 import personal.opensrcerer.ui.WindowLayout;
+import personal.opensrcerer.ui.components.custom.messages.SuicideInfo;
 import personal.opensrcerer.util.NameGenerator;
 
 /**
  * A specialized CircularLinkedList that displays output about some of its operations.
  */
-public class SuiciderManager extends CircularLinkedList<Suicider> {
+public class SuicideManager extends CircularLinkedList<Suicider> {
 
     private static Integer suiciderNodes = null;
 
     private static Integer magicNumber = null;
 
-    private static SuiciderManager manager = null;
+    private static SuicideManager manager = null;
 
     private static int[] snapshots = null;
 
     private static int currentStep;
 
-    public static SuiciderManager getInstance() {
+    public static SuicideManager getInstance() {
         if (manager == null) {
-            manager = new SuiciderManager();
+            manager = new SuicideManager();
         }
         return manager;
     }
 
     public static void setValues(Integer suiciderNodes, Integer magicNumber) {
-        SuiciderManager.suiciderNodes = suiciderNodes;
-        SuiciderManager.magicNumber = magicNumber;
+        SuicideManager.suiciderNodes = suiciderNodes;
+        SuicideManager.magicNumber = magicNumber;
 
         if (suiciderNodes == null && magicNumber == null) {
             WindowLayout.viewportPane.reset();
@@ -63,7 +64,7 @@ public class SuiciderManager extends CircularLinkedList<Suicider> {
             manager.add(suiciderToAdd);
             suiciders[index] = suiciderToAdd;
         }
-        snapshots = manager.getSuicideSnapshots(getMagicNumber());
+        manager.setSuicideSnapshots(getMagicNumber());
         currentStep = snapshots.length - 1;
 
         return suiciders;
@@ -78,28 +79,25 @@ public class SuiciderManager extends CircularLinkedList<Suicider> {
     }
 
     public static int getSnapshot() {
-        return snapshots[currentStep];
+        return (currentStep == -1) ?
+                snapshots[currentStep + 1] : snapshots[currentStep];
     }
 
-    public static void setCurrentStep(int currentStep) {
-        if (currentStep < 0) {
-            currentStep = 0;
-        } else if (currentStep >= snapshots.length) {
-            currentStep = snapshots.length - 1;
+    public static void setCurrentStep(int step) {
+        if (step < -1) {
+            step = -1;
+        } else if (step >= snapshots.length) {
+            step = snapshots.length - 1;
         }
 
-        SuiciderManager.currentStep = currentStep;
+        SuicideManager.currentStep = step;
     }
 
     public static int getCurrentStep() {
         return currentStep;
     }
 
-    private int[] getSuicideSnapshots(int n) {
-        if (super.size() <= 1) {
-            return null;
-        }
-
+    private void setSuicideSnapshots(int n) {
         int originalSize = super.size();
         int[] suicides = new int[originalSize - 1];
 
@@ -108,6 +106,6 @@ public class SuiciderManager extends CircularLinkedList<Suicider> {
             suicides[index] = this.getCurrentValue().getPosition();
             super.deleteCurrent();
         }
-        return suicides;
+        snapshots = suicides;
     }
 }

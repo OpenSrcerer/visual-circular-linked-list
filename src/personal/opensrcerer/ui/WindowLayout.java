@@ -19,16 +19,25 @@ public abstract class WindowLayout {
 
     public static final KTextField magicNumberField = new KTextField("", 5, FieldType.MAGIC_NUMBER);
 
+    public static final KButton[] buttons = {
+            new KButton("Previous", ButtonType.PREVIOUS),
+            new KButton("First", ButtonType.FIRST),
+            new KButton("Next", ButtonType.NEXT),
+            new KButton("Last", ButtonType.LAST),
+    };
+
     public static final NodeViewPort viewportPane = new NodeViewPort();
 
     public static void set() {
         JPanel mainPanel = new KPanel(BoxLayout.PAGE_AXIS),
-                viewportWrapper = new KPanel(),
-                textFieldWrapper = new KPanel(BoxLayout.LINE_AXIS, DiscordColor.darkPurple),
-                leftFieldWrapper = new KPanel(BoxLayout.PAGE_AXIS, DiscordColor.darkPurple),
+                viewportWrapper =   new KPanel(),
+                textFieldWrapper =  new KPanel(BoxLayout.LINE_AXIS, DiscordColor.darkPurple),
+                leftFieldWrapper =  new KPanel(BoxLayout.PAGE_AXIS, DiscordColor.darkPurple),
                 rightFieldWrapper = new KPanel(BoxLayout.PAGE_AXIS, DiscordColor.darkPurple),
-                inputWrapper = new KPanel(new FlowLayout(), DiscordColor.darkPurple),
-                borderWrapper = new KPanel(new BorderLayout(), DiscordColor.darkPurple);
+                inputWrapper =      new KPanel(new FlowLayout(), DiscordColor.darkPurple),
+                borderWrapper =     new KPanel(new BorderLayout(), DiscordColor.darkPurple),
+                reverseWrapper =    new KPanel(new GridLayout(2, 1), DiscordColor.darkPurple),
+                forwardWrapper =    new KPanel(new GridLayout(2, 1), DiscordColor.darkPurple);
 
         viewportWrapper.add(viewportPane);
 
@@ -46,9 +55,14 @@ public abstract class WindowLayout {
 
         inputWrapper.add(textFieldWrapper);
 
-        borderWrapper.add(new KButton("Previous", ButtonType.NEXT), BorderLayout.WEST);
+        forwardWrapper.add(buttons[0]);
+        forwardWrapper.add(buttons[1]);
+        reverseWrapper.add(buttons[2]);
+        reverseWrapper.add(buttons[3]);
+
+        borderWrapper.add(forwardWrapper, BorderLayout.WEST);
         borderWrapper.add(inputWrapper, BorderLayout.CENTER);
-        borderWrapper.add(new KButton("Next", ButtonType.PREVIOUS), BorderLayout.EAST);
+        borderWrapper.add(reverseWrapper, BorderLayout.EAST);
 
         mainPanel.add(banner);
         mainPanel.add(new KSeparator());
@@ -67,7 +81,7 @@ public abstract class WindowLayout {
      * @param y Y value of the rigid area.
      * @return Newly created rigid area with the size X, Y.
      */
-    private static Component boxRigidArea(int x, int y) {
+    public static Component boxRigidArea(int x, int y) {
         return Box.createRigidArea(new Dimension(x, y));
     }
 }

@@ -9,13 +9,16 @@ import javax.swing.*;
 public class MissingMagicNumber extends KPanel {
     private static MissingMagicNumber missingMagicNumber;
 
-    private static final String TEXT = "Missing Magic Number";
+    private static final String TITLE_TEXT = "Please insert a magic number value!";
+
+    private static final String EXPLAIN_TEXT = "You may insert a number from 1 - 9999.";
 
     public MissingMagicNumber() {
         super(BoxLayout.PAGE_AXIS);
-        this.setLocation(50, 250);
+        this.setLocation(50, 300);
         this.setSize(700, 200);
-        this.add(new KLabel(TEXT, Fonts.bigTitleFont));
+        this.add(new KLabel(TITLE_TEXT, Fonts.bigTitleFont));
+        this.add(new KLabel(EXPLAIN_TEXT, Fonts.descriptionFont));
     }
 
     public static MissingMagicNumber get() {

@@ -19,10 +19,13 @@ public class KButton extends JButton {
      */
     public KButton(String text, ButtonType type) {
         super(text);
+        this.setOpaque(true);
+        this.setBorderPainted(false);
         this.setHorizontalAlignment(SwingConstants.CENTER);
         this.addMouseListener(new ButtonMouseAdapter(this));
         this.addActionListener(new ButtonClickAdapter(type));
-        this.setPreferredSize(new Dimension(130, 70));
+        this.setPreferredSize(new Dimension(130, 30));
+        this.setFocusPainted(false);
         Painter.paintBase(this);
     }
 }

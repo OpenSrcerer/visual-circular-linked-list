@@ -5,7 +5,7 @@ import personal.opensrcerer.ui.UIConstants;
 import personal.opensrcerer.ui.components.events.NodeMouseAdapter;
 import personal.opensrcerer.ui.styling.DiscordColor;
 import personal.opensrcerer.ui.styling.Fonts;
-import personal.opensrcerer.ui.styling.Painter;
+import personal.opensrcerer.ui.styling.Strokes;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +18,6 @@ public class SuiciderNode extends JButton {
     private final Point location;
     private final Suicider suicider;
 
-    private DiscordColor outlineColor;
     private boolean dead;
     private boolean hover;
 
@@ -31,7 +30,6 @@ public class SuiciderNode extends JButton {
         this.location = new Point(x, y);
 
         this.hover = false;
-        this.outlineColor = isKitsos() ? DiscordColor.online : DiscordColor.blurple;
         this.setLocation(x, y);
         this.setSize(NODE_FULL_SIZE, NODE_FULL_SIZE);
         this.setContentAreaFilled(false);
@@ -49,7 +47,7 @@ public class SuiciderNode extends JButton {
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         drawNodeFill(g2d);
-        drawNodeOutline(g2d, this.outlineColor.get());
+        drawNodeOutline(g2d);
         drawNodeLetter(g2d);
 
         if (this.isDead()) {
@@ -66,10 +64,14 @@ public class SuiciderNode extends JButton {
         g2d.fill(circle);
     }
 
-    private void drawNodeOutline(Graphics2D g2d, Color color) {
-        g2d.setColor(color);
-        g2d.setStroke((isKitsos() ? Painter.NODE_STROKE_KITSOS :
-                Painter.NODE_STROKE));
+    private void drawNodeOutline(Graphics2D g2d) {
+        g2d.setColor(isKitsos() ? DiscordColor.online.get() :
+                DiscordColor.blurple.get());
+        if (this.hover) {
+            g2d.setColor(DiscordColor.purple.get());
+        }
+        g2d.setStroke((isKitsos() ? Strokes.NODE_STROKE_KITSOS.get() :
+                Strokes.NODE_STROKE.get()));
         g2d.drawOval(UIConstants.NODE_STROKE_OFFSET, UIConstants.NODE_STROKE_OFFSET,
                 NODE_BASE_SIZE, NODE_BASE_SIZE);
     }
@@ -114,16 +116,14 @@ public class SuiciderNode extends JButton {
         this.hover = hover;
     }
 
-    public void setOutlineColor(DiscordColor outlineColor) {
-        this.outlineColor = outlineColor;
-    }
-
     public void revive() {
         this.dead = false;
+        this.refresh();
     }
 
     public void kill() {
         this.dead = true;
+        this.refresh();
     }
 
     public boolean isDead() {

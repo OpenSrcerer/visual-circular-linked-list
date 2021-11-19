@@ -20,19 +20,14 @@ public enum Fonts {
     titleFont(new Font("Century Gothic", Font.PLAIN, 20)),
 
     /**
-     * Used for small descriptions.
+     * Used for text fields.
      */
-    descriptionFont(new Font("Century Gothic", Font.PLAIN, 14)),
+    textFieldFont(new Font("Arial", Font.PLAIN, 30)),
 
     /**
-     * Used for small buttons.
+     * Used for explanatory messages.
      */
-    actionFont(new Font("Arial", Font.PLAIN, 30)),
-
-    /**
-     * Used for TextFields.
-     */
-    outputFont(new Font("Arial", Font.ITALIC, 13));
+    descriptionFont(new Font("Arial", Font.ITALIC, 25));
 
     private final Font font;
 

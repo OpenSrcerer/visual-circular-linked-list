@@ -21,7 +21,6 @@ public class NodeMouseAdapter extends MouseAdapter {
         Window.contentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         WindowLayout.banner.update("Selected: " + node.name() +
                 (node.isDead() ? " (Dead)" : "") + " // " + "Position: " + node.position());
-        node.setOutlineColor(DiscordColor.purple);
         node.setHover(true);
         node.refresh();
     }
@@ -30,7 +29,6 @@ public class NodeMouseAdapter extends MouseAdapter {
     public void mouseExited(MouseEvent e) {
         Window.contentPane().setCursor(Cursor.getDefaultCursor());
         WindowLayout.banner.update();
-        node.setOutlineColor((node.isKitsos()) ? DiscordColor.online : DiscordColor.blurple);
         node.setHover(false);
         node.refresh();
     }

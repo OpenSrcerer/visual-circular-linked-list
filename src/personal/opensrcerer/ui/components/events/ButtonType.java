@@ -1,7 +1,8 @@
 package personal.opensrcerer.ui.components.events;
 
 public enum ButtonType {
-    NEXT,
+    FIRST,
     PREVIOUS,
-    SNAPSHOT
+    NEXT,
+    LAST
 }

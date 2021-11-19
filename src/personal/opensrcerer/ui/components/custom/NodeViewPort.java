@@ -1,13 +1,10 @@
 package personal.opensrcerer.ui.components.custom;
 
 import personal.opensrcerer.entities.Suicider;
-import personal.opensrcerer.entities.SuiciderManager;
+import personal.opensrcerer.entities.SuicideManager;
 import personal.opensrcerer.ui.UIConstants;
 import personal.opensrcerer.ui.WindowLayout;
-import personal.opensrcerer.ui.components.custom.messages.FirstMessage;
-import personal.opensrcerer.ui.components.custom.messages.InvalidValue;
-import personal.opensrcerer.ui.components.custom.messages.MissingMagicNumber;
-import personal.opensrcerer.ui.components.custom.messages.MissingSuiciderNumber;
+import personal.opensrcerer.ui.components.custom.messages.*;
 import personal.opensrcerer.ui.styling.Painter;
 
 import javax.swing.*;
@@ -33,8 +30,8 @@ public class NodeViewPort extends JLayeredPane {
     public void setNodes() {
         this.removeAll();
 
-        int nodes = SuiciderManager.getSuiciderNodes();
-        int magicNumber = SuiciderManager.getMagicNumber();
+        int nodes = SuicideManager.getSuiciderNodes();
+        int magicNumber = SuicideManager.getMagicNumber();
 
         if (magicNumber < 1 || (nodes < 2 || nodes > 40)) {
             this.add(InvalidValue.get());
@@ -42,7 +39,7 @@ public class NodeViewPort extends JLayeredPane {
             return;
         }
 
-        SuiciderManager manager = SuiciderManager.getInstance();
+        SuicideManager manager = SuicideManager.getInstance();
         manager.clear();
         this.suiciderMap.clear();
 
@@ -57,24 +54,47 @@ public class NodeViewPort extends JLayeredPane {
             previous = node;
         }
 
+        this.add(SuicideInfo.get(nodes));
         WindowLayout.banner.update();
         this.refresh();
     }
 
-    public void nextStep() {
-        SuiciderManager.setCurrentStep(SuiciderManager.getCurrentStep() + 1);
-        int nodeToKillPosition = SuiciderManager.getSnapshot();
-        SuiciderNode node = suiciderMap.get(nodeToKillPosition);
-        node.kill();
-        node.refresh();
+    public void first() {
+        this.suiciderMap.forEach((pos, node) -> node.revive());
+        SuicideManager.setCurrentStep(-1);
+        SuicideInfo.noSuicides();
     }
 
     public void previousStep() {
-        SuiciderManager.setCurrentStep(SuiciderManager.getCurrentStep() - 1);
-        int nodeToRevivePosition = SuiciderManager.getSnapshot();
+        int nodeToRevivePosition = SuicideManager.getSnapshot();
         SuiciderNode node = suiciderMap.get(nodeToRevivePosition);
         node.revive();
-        node.refresh();
+        SuicideManager.setCurrentStep(
+                SuicideManager.getCurrentStep() - (
+                (SuicideManager.getCurrentStep() == 0) ? 2 : 1));
+        if (SuicideManager.getCurrentStep() == -1) {
+            SuicideInfo.noSuicides();
+        } else {
+            SuicideInfo.update();
+        }
+    }
+
+    public void nextStep() {
+        SuicideManager.setCurrentStep(SuicideManager.getCurrentStep() + 1);
+        int nodeToKillPosition = SuicideManager.getSnapshot();
+        SuiciderNode node = suiciderMap.get(nodeToKillPosition);
+        node.kill();
+        SuicideInfo.update();
+    }
+
+    public void last() {
+        this.suiciderMap.forEach((pos, node) -> {
+            if (!node.isKitsos()) {
+                node.kill();
+            }
+        });
+        SuicideManager.setCurrentStep(Integer.MAX_VALUE);
+        SuicideInfo.update();
     }
 
     public void setMissingMagicNumber() {
@@ -95,9 +115,17 @@ public class NodeViewPort extends JLayeredPane {
         this.refresh();
     }
 
-    private void refresh() {
+    public void refresh() {
         this.invalidate();
         this.repaint();
+    }
+
+    public String getSuiciderNameByPosition(int pos) {
+        SuiciderNode node = suiciderMap.get(pos);
+        if (node == null) {
+            return "";
+        }
+        return node.name();
     }
 
     private SuiciderNode[] getNodesInCircle(Suicider[] suiciders) {
