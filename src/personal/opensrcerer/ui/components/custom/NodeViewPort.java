@@ -24,7 +24,7 @@ public class NodeViewPort extends JLayeredPane {
         this.setLayout(null);
         this.setPreferredSize(new Dimension(800,700));
         Painter.paintBase(this);
-        add(FirstMessage.get());
+        add(Guide.get());
     }
 
     public void setNodes() {
@@ -111,7 +111,7 @@ public class NodeViewPort extends JLayeredPane {
 
     public void reset() {
         this.removeAll();
-        this.add(FirstMessage.get());
+        this.add(Guide.get());
         this.refresh();
     }
 

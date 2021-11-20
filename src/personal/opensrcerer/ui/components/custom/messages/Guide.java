@@ -8,8 +8,8 @@ import personal.opensrcerer.ui.styling.Fonts;
 import javax.swing.*;
 import java.awt.*;
 
-public class FirstMessage extends KPanel {
-    private static FirstMessage firstMessage;
+public class Guide extends KPanel {
+    private static Guide guide;
 
     private static final String TEXT = "Welcome to Kitsos' Program!";
 
@@ -25,11 +25,15 @@ public class FirstMessage extends KPanel {
 
     private static final String EXPLAIN_TEXT_6 = "<html><li><b>Last</b> - Go to the state after the last suicide</li></html>";
 
-    private FirstMessage() {
+    private Guide() {
         super(BoxLayout.PAGE_AXIS);
         this.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.setLocation(50, 150);
         this.setSize(700, 400);
+        this.addText();
+    }
+
+    private void addText() {
         this.add(new KLabel(TEXT, Fonts.bigTitleFont));
         this.add(WindowLayout.boxRigidArea(0, 20));
         this.add(new KLabel(EXPLAIN_TEXT_1, Fonts.descriptionFont));
@@ -41,10 +45,10 @@ public class FirstMessage extends KPanel {
         this.add(new KLabel(EXPLAIN_TEXT_6, Fonts.descriptionFont));
     }
 
-    public static FirstMessage get() {
-        if (firstMessage == null) {
-            firstMessage = new FirstMessage();
+    public static Guide get() {
+        if (guide == null) {
+            guide = new Guide();
         }
-        return firstMessage;
+        return guide;
     }
 }

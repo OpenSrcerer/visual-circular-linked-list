@@ -16,7 +16,9 @@ public enum DiscordColor {
     darkPurple(new Color(60, 48, 73)),
     online(new Color(50, 217, 28)),
 
-    regularGrayTransparent(new Color(54, 57, 63)),
+    blurpleTransparent(new Color(78, 93, 148, 140)),
+    lightGrayTransparent(new Color(185, 187, 190, 140)),
+    regularGrayTransparent(new Color(54, 57, 63, 140)),
 
     dndTransparent(new Color(1f, 0f, 0f, 0.75f)),
     dndMoreTransparent(new Color(1f, 0f, 0f, 0.35f));

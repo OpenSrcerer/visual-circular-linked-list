@@ -2,7 +2,6 @@ package personal.opensrcerer.entities;
 
 import personal.opensrcerer.circularList.CircularLinkedList;
 import personal.opensrcerer.ui.WindowLayout;
-import personal.opensrcerer.ui.components.custom.messages.SuicideInfo;
 import personal.opensrcerer.util.NameGenerator;
 
 /**

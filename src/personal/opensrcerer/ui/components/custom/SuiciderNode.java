@@ -56,8 +56,7 @@ public class SuiciderNode extends JButton {
     }
 
     private void drawNodeFill(Graphics2D g2d) {
-        g2d.setColor((isKitsos() ? DiscordColor.grayest.get() :
-                DiscordColor.lightGray.get()));
+        this.setFillColor(g2d);
         Ellipse2D.Double circle = new Ellipse2D.Double(
                 UIConstants.NODE_STROKE_OFFSET, UIConstants.NODE_STROKE_OFFSET,
                 NODE_BASE_SIZE, NODE_BASE_SIZE);
@@ -65,8 +64,7 @@ public class SuiciderNode extends JButton {
     }
 
     private void drawNodeOutline(Graphics2D g2d) {
-        g2d.setColor(isKitsos() ? DiscordColor.online.get() :
-                DiscordColor.blurple.get());
+        this.setOutlineColor(g2d);
         if (this.hover) {
             g2d.setColor(DiscordColor.purple.get());
         }
@@ -77,8 +75,7 @@ public class SuiciderNode extends JButton {
     }
 
     private void drawNodeLetter(Graphics2D g2d) {
-        g2d.setColor((isKitsos() ? DiscordColor.lightGray.get() :
-                DiscordColor.regularGray.get()));
+        this.setLetterColor(g2d);
         g2d.setFont(Fonts.nodeFont.get());
         g2d.drawString(this.name().substring(0, 1),
                 (NODE_BASE_SIZE / 2) - UIConstants.NODE_FONT_HORIZONTAL_OFFSET,
@@ -97,6 +94,36 @@ public class SuiciderNode extends JButton {
                 NODE_SIZE_PADDING,
                 NODE_BASE_SIZE
         );
+    }
+
+    private void setFillColor(Graphics2D g2d) {
+        g2d.setColor(DiscordColor.lightGray.get());
+        if (isKitsos())
+            g2d.setPaint(DiscordColor.grayest.get());
+        else if (isDead())
+            g2d.setPaint(DiscordColor.lightGrayTransparent.get());
+        if (hover && !isKitsos())
+            g2d.setPaint(DiscordColor.lightGray.get());
+    }
+
+    private void setOutlineColor(Graphics2D g2d) {
+        g2d.setColor(DiscordColor.blurple.get());
+        if (isKitsos())
+            g2d.setPaint(DiscordColor.online.get());
+        else if (isDead())
+            g2d.setPaint(DiscordColor.blurpleTransparent.get());
+        if (hover && !isKitsos())
+            g2d.setPaint(DiscordColor.blurple.get());
+    }
+
+    private void setLetterColor(Graphics2D g2d) {
+        g2d.setColor(DiscordColor.regularGray.get());
+        if (isKitsos())
+            g2d.setPaint(DiscordColor.lightGray.get());
+        else if (isDead())
+            g2d.setPaint(DiscordColor.regularGrayTransparent.get());
+        if (hover && !isKitsos())
+            g2d.setPaint(DiscordColor.regularGray.get());
     }
 
     public void refresh() {

@@ -30,7 +30,7 @@ public class SuicideInfo extends KPanel {
 
         switch (nodes) {
             case 2 -> suicideInfo.setLocation(50, 200);
-            case 3 -> suicideInfo.setLocation(70, 290);
+            case 3 -> suicideInfo.setLocation(90, 290);
             default -> suicideInfo.setLocation(50, 290);
         }
 

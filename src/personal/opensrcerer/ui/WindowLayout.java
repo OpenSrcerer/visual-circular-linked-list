@@ -29,7 +29,7 @@ public abstract class WindowLayout {
     public static final NodeViewPort viewportPane = new NodeViewPort();
 
     public static void set() {
-        JPanel mainPanel = new KPanel(BoxLayout.PAGE_AXIS),
+        final JPanel mainPanel = new KPanel(BoxLayout.PAGE_AXIS),
                 viewportWrapper =   new KPanel(),
                 textFieldWrapper =  new KPanel(BoxLayout.LINE_AXIS, DiscordColor.darkPurple),
                 leftFieldWrapper =  new KPanel(BoxLayout.PAGE_AXIS, DiscordColor.darkPurple),
