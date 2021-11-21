@@ -23,6 +23,7 @@ public class KButton extends KPanel {
     /**
      * Creates a custom JButton.
      * @param text Name and initial text of button.
+     * @param type Type of button.
      */
     public KButton(String text, ButtonType type) {
         super(new GridLayout(1, 1));

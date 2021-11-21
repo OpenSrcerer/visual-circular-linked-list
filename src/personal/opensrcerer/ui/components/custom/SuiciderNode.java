@@ -81,7 +81,7 @@ public class SuiciderNode extends JButton {
         drawNodeLetter(g2d);
 
         if (this.isDead()) {
-            drawDeathCross(g2d, this.hover);
+            drawDeathCross(g2d);
         }
     }
 
@@ -129,8 +129,8 @@ public class SuiciderNode extends JButton {
      * Draw a red cross over the node if it has died.
      * @param g2d This component's 2D graphics object.
      */
-    private void drawDeathCross(Graphics2D g2d, boolean hover) {
-        g2d.setPaint(hover ? DiscordColor.dndMoreTransparent.get() : DiscordColor.dndTransparent.get());
+    private void drawDeathCross(Graphics2D g2d) {
+        g2d.setPaint(this.hover ? DiscordColor.dndMoreTransparent.get() : DiscordColor.dndTransparent.get());
         g2d.drawLine(NODE_SIZE_PADDING + 1,
                 NODE_SIZE_PADDING + 1,
                 NODE_BASE_SIZE + 1,
@@ -186,7 +186,7 @@ public class SuiciderNode extends JButton {
     }
 
     /**
-     * Invalidate & repaint this component.
+     * Invalidate and repaint this component.
      */
     public void refresh() {
         this.invalidate();

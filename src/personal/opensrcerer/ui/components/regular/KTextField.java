@@ -31,6 +31,7 @@ public class KTextField extends JTextField {
     /**
      * @param defaultText Default placeholder text for JTextField.
      * @param columns Number of columns JTextField will be constructed with.
+     * @param type Type of field.
      */
     public KTextField(String defaultText, int columns, FieldType type) {
         super(defaultText, columns);

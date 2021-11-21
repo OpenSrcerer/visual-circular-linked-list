@@ -67,7 +67,7 @@ public class Banner extends KPanel {
     }
 
     /**
-     * Revalidate & repaint this component.
+     * Revalidate and repaint this component.
      */
     private void refresh() {
         this.revalidate();

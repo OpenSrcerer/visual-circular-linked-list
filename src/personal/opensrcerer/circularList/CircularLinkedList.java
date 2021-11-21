@@ -148,6 +148,7 @@ public class CircularLinkedList<E> {
      *
      * If list has 1 or no elements, it remains unchanged and the method returns null.
      * @param n The N number to perform this operation with.
+     * @return The remaining node in the list.
      */
     public E removeUntilLast(int n) {
         // Step 0a: Check if the list has one element or is empty

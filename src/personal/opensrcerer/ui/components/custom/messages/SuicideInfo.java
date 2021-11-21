@@ -51,6 +51,7 @@ public class SuicideInfo extends KPanel {
 
     /**
      * @return The singleton instance of this component.
+     * @param nodes The number of suicider nodes.
      */
     public static SuicideInfo get(int nodes) {
         if (suicideInfo == null) {
