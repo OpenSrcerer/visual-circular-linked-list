@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class CircularLinkedList<E> {
 
     /**
-     * The first element in the list.
+     * The first node in the list.
      */
     protected CircularNode<E> firstElement = null;
 
@@ -28,9 +28,9 @@ public class CircularLinkedList<E> {
     protected CircularNode<E> current = null;
 
     /**
-     * The previous node of the list.
+     * The next node after the current one.
      */
-    protected CircularNode<E> previous = null;
+    protected CircularNode<E> next = null;
 
     /**
      * Contains the number of elements in this linked list.
@@ -48,6 +48,7 @@ public class CircularLinkedList<E> {
      * @param elements The array that contains the elements this list will start out with.
      */
     public CircularLinkedList(E[] elements) {
+        // Stream all elements and add each of them to this list.
         Arrays.stream(elements).forEach(this::add);
     }
 
@@ -56,18 +57,19 @@ public class CircularLinkedList<E> {
      * @param data Data to insert.
      */
     public void add(E data) {
-        this.insert(data);
-        this.next();
-        ++size;
+        this.insert(data); // Step 1: Insert the node
+        this.next(); // Step 2: Advance the list by one element
+        ++size; // Step 3: Increase the list size
     }
 
     /**
      * Advance this LinkedList by one node.
      */
     public void next() {
+        // Step 1: Check if the current node is non-null (list is not empty)
         if (current != null) {
-            previous = current; // Make the current node the previous node
-            current = previous.next; // Advance the current node
+            next = current; // Step 2: Set the next node to the current node.
+            current = next.next; // Step 3: Set the current node to the node after the current
         }
     }
 
@@ -76,11 +78,9 @@ public class CircularLinkedList<E> {
      * @param n Number to advance list by.
      */
     public void next(int n) {
+        // For the given number N iterate
         for (int i = 0; i < n; ++i) {
-            if (current != null) {
-                previous = current; // Make the current node the previous node
-                current = previous.next; // Advance the current node
-            }
+            this.next(); // Advance to the next element
         }
     }
 
@@ -89,17 +89,19 @@ public class CircularLinkedList<E> {
      * @param data The new data to insert.
      */
     private void insert(E data) {
+        // Step 0: Create a new node with the data
         CircularNode<E> newNode = new CircularNode<>(data);
-        if (current == null) { // Case if the list is empty
-            firstElement = newNode;
-            previous = newNode;
-            current = newNode;
-            newNode.next = newNode;
-        } else {
-            // Make the new Node the current node but leave the previous node unchanged
-            previous.next = newNode;
-            newNode.next = current;
-            current = newNode;
+
+        // Step 1a: Check if list is empty
+        if (current == null) {
+            firstElement = newNode; // Step 2a: Set the first node to the new node
+            next = newNode; // Step 3a: Set the next node to the new node
+            current = newNode; // Step 4a: Set the current element to the new node
+            newNode.next = newNode; // Step 5a: Point the current node's next to itself
+        } else { // If the list is not empty
+            next.next = newNode; // Step 2b: Set the next node's next node to the new node
+            newNode.next = current; // Step 3b: Set the new node's next to the current
+            current = newNode; // Step 4b: Set the current node to the new one
         }
     }
 
@@ -107,19 +109,22 @@ public class CircularLinkedList<E> {
      * Removes the current node.
      */
     protected void deleteCurrent() {
+        // Step 0: Check if list is empty.
         if (size() == 0) {
-            return;
+            return; // Exit if list is empty.
         }
 
+        // Step 1a: Check if the first node is the current node
         if (firstElement.equals(current)){
+            // Step 1b: If it is, set the first element to the node after the first.
             firstElement = current.next;
         }
 
-        current = current.next;
-        if (previous != null) {
-            previous.next = current;
+        current = current.next; // Step 2: Set the current element to the one after the current
+        if (next != null) { // Step 3: If the next node is not null
+            next.next = current; // Step 4: Set the node after the next node to the current.
         }
-        --size;
+        --size; // Step 5: Decrement this list's size
     }
 
     /**
@@ -138,32 +143,31 @@ public class CircularLinkedList<E> {
 
     /**
      * This method removes nodes from the list in the following fashion:
-     * Firstly, it advances and removes the n-th node. Then, it removes
-     * every n-th node starting from the node after it was removed.
-     * The method returns the original position of node that remains.
+     * It advances the list by n - 1 nodes, then removes the current node
+     * at the time.
      *
-     * If list has 1 or no elements, it remains unchanged and the method returns nul.
+     * If list has 1 or no elements, it remains unchanged and the method returns null.
      * @param n The N number to perform this operation with.
-     * @return The last element remaining.
      */
     public E removeUntilLast(int n) {
+        // Step 0a: Check if the list has one element or is empty
         if (size() <= 1) {
-            return null;
+            return null; // Step 0b: Return null if so
         }
         while (size() >= 1) {
-            this.next(n - 1);
-            deleteCurrent();
+            this.next(n - 1); // Step 1: Advance the list by n - 1 nodes.
+            deleteCurrent(); // Step 2: Delete the current node.
         }
-        return current.element;
+        return current.element; // Step 3: Return the remaining node.
     }
 
     /**
      * Remove all the elements in this list.
      */
     public void clear() {
-        this.size = 0;
-        this.firstElement = null;
-        this.current = null;
-        this.previous = null;
+        this.size = 0; // Step 1: Set the size to 0.
+        this.firstElement = null; // Step 2: Set the first element to null.
+        this.current = null; // Step 3: Set the current element to null.
+        this.next = null; // Step 4: Set the next element to null.
     }
 }

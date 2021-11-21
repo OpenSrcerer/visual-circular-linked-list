@@ -1,10 +1,16 @@
+/*
+ * Made for the Project in CS215, due November 22nd 2021.
+ * This work is licensed under the GNU General Public License v3.0
+ * GNU © 2021 Daniel Stefani / OpenSrcerer
+ */
+
 package personal.opensrcerer.ui.styling;
 
 import java.awt.*;
 
 /**
  * An enum that shows the available colors
- * for the UI. Inspired by the Discord theme.
+ * for the UI. Inspired by the Discord application theme.
  */
 public enum DiscordColor {
     lightGray(new Color(185, 187, 190)),
@@ -23,12 +29,22 @@ public enum DiscordColor {
     dndTransparent(new Color(1f, 0f, 0f, 0.75f)),
     dndMoreTransparent(new Color(1f, 0f, 0f, 0.35f));
 
+    /**
+     * The color object of this enum.
+     */
     private final Color color;
 
+    /**
+     * Create a new DiscordColor with a specific Color object.
+     * @param color Color to contain.
+     */
     DiscordColor(Color color) {
         this.color = color;
     }
 
+    /**
+     * @return The Color object of this enum.
+     */
     public Color get() {
         return this.color;
     }

@@ -28,18 +28,4 @@ public class CircularNode<E> {
     protected CircularNode(E data) {
         this.element = data;
     }
-
-    /**
-     * @return The value contained in this node.
-     */
-    public E getElement() {
-        return element;
-    }
-
-    /**
-     * @return The next node after the current.
-     */
-    public CircularNode<E> getNext() {
-        return next;
-    }
 }

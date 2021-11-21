@@ -1,7 +1,13 @@
+/*
+ * Made for the Project in CS215, due November 22nd 2021.
+ * This work is licensed under the GNU General Public License v3.0
+ * GNU © 2021 Daniel Stefani / OpenSrcerer
+ */
+
 package personal.opensrcerer.entities;
 
 /**
- * The Data class that keeps information
+ * The class that stores information
  * about the individuals who will suicide.
  */
 public class Suicider {
@@ -14,7 +20,6 @@ public class Suicider {
      * The name of the suicider.
      */
     private final String name;
-
 
     /**
      * Create a new Suicider.

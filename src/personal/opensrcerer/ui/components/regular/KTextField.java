@@ -1,3 +1,9 @@
+/*
+ * Made for the Project in CS215, due November 22nd 2021.
+ * This work is licensed under the GNU General Public License v3.0
+ * GNU © 2021 Daniel Stefani / OpenSrcerer
+ */
+
 package personal.opensrcerer.ui.components.regular;
 
 import personal.opensrcerer.ui.components.events.FieldDocumentAdapter;
@@ -16,6 +22,10 @@ import java.awt.*;
  */
 public class KTextField extends JTextField {
 
+    /**
+     * The field type of this text field.
+     * Used by action listeners to identify which action to take.
+     */
     public final FieldType type;
 
     /**

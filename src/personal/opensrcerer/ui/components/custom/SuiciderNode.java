@@ -1,3 +1,9 @@
+/*
+ * Made for the Project in CS215, due November 22nd 2021.
+ * This work is licensed under the GNU General Public License v3.0
+ * GNU © 2021 Daniel Stefani / OpenSrcerer
+ */
+
 package personal.opensrcerer.ui.components.custom;
 
 import personal.opensrcerer.entities.Suicider;
@@ -13,14 +19,38 @@ import java.awt.geom.Ellipse2D;
 
 import static personal.opensrcerer.ui.UIConstants.*;
 
+/**
+ * A UI component representing one individual able
+ * to commit suicide.
+ */
 public class SuiciderNode extends JButton {
 
+    /**
+     * The location of this node in 2D space.
+     */
     private final Point location;
+
+    /**
+     * The Suicider object associated with this node.
+     */
     private final Suicider suicider;
 
+    /**
+     * Whether this node is dead.
+     */
     private boolean dead;
+
+    /**
+     * Whether the user is hovering over the node.
+     */
     private boolean hover;
 
+    /**
+     * Create a new SuiciderNode.
+     * @param x The X position in 2d space for this node.
+     * @param y The Y position in 2d space for this node.
+     * @param suicider The Suicider object associated with this node.
+     */
     public SuiciderNode(
             int x,
             int y,
@@ -55,6 +85,10 @@ public class SuiciderNode extends JButton {
         }
     }
 
+    /**
+     * Draw the circular fill (background) of the node.
+     * @param g2d This component's 2D graphics object.
+     */
     private void drawNodeFill(Graphics2D g2d) {
         this.setFillColor(g2d);
         Ellipse2D.Double circle = new Ellipse2D.Double(
@@ -63,6 +97,10 @@ public class SuiciderNode extends JButton {
         g2d.fill(circle);
     }
 
+    /**
+     * Draw the outline circle of the node.
+     * @param g2d This component's 2D graphics object.
+     */
     private void drawNodeOutline(Graphics2D g2d) {
         this.setOutlineColor(g2d);
         if (this.hover) {
@@ -74,6 +112,11 @@ public class SuiciderNode extends JButton {
                 NODE_BASE_SIZE, NODE_BASE_SIZE);
     }
 
+    /**
+     * Draw the letter inside the node representing the
+     * name of the individual.
+     * @param g2d This component's 2D graphics object.
+     */
     private void drawNodeLetter(Graphics2D g2d) {
         this.setLetterColor(g2d);
         g2d.setFont(Fonts.nodeFont.get());
@@ -82,6 +125,10 @@ public class SuiciderNode extends JButton {
                 NODE_BASE_SIZE - UIConstants.NODE_FONT_VERTICAL_OFFSET);
     }
 
+    /**
+     * Draw a red cross over the node if it has died.
+     * @param g2d This component's 2D graphics object.
+     */
     private void drawDeathCross(Graphics2D g2d, boolean hover) {
         g2d.setPaint(hover ? DiscordColor.dndMoreTransparent.get() : DiscordColor.dndTransparent.get());
         g2d.drawLine(NODE_SIZE_PADDING + 1,
@@ -96,6 +143,10 @@ public class SuiciderNode extends JButton {
         );
     }
 
+    /**
+     * Set the fill color of this node.
+     * @param g2d This component's 2D graphics object.
+     */
     private void setFillColor(Graphics2D g2d) {
         g2d.setColor(DiscordColor.lightGray.get());
         if (isKitsos())
@@ -106,6 +157,10 @@ public class SuiciderNode extends JButton {
             g2d.setPaint(DiscordColor.lightGray.get());
     }
 
+    /**
+     * Set the outline color of this node.
+     * @param g2d This component's 2D graphics object.
+     */
     private void setOutlineColor(Graphics2D g2d) {
         g2d.setColor(DiscordColor.blurple.get());
         if (isKitsos())
@@ -116,6 +171,10 @@ public class SuiciderNode extends JButton {
             g2d.setPaint(DiscordColor.blurple.get());
     }
 
+    /**
+     * Set the letter color of this node.
+     * @param g2d This component's 2D graphics object.
+     */
     private void setLetterColor(Graphics2D g2d) {
         g2d.setColor(DiscordColor.regularGray.get());
         if (isKitsos())
@@ -126,45 +185,76 @@ public class SuiciderNode extends JButton {
             g2d.setPaint(DiscordColor.regularGray.get());
     }
 
+    /**
+     * Invalidate & repaint this component.
+     */
     public void refresh() {
         this.invalidate();
         this.repaint();
     }
 
+    /**
+     * @return The X component of this node's center in 2d space.
+     */
     public int centerX() {
         return this.location.x + NODE_BASE_SIZE / 2;
     }
 
+    /**
+     * @return The Y component of this node's center in 2d space.
+     */
     public int centerY() {
         return this.location.y + NODE_BASE_SIZE / 2;
     }
 
+    /**
+     * Update whether this node is being hovered on.
+     * @param hover If user is hovering over this node.
+     */
     public void setHover(boolean hover) {
         this.hover = hover;
     }
 
+    /**
+     * Revive this node and refresh it.
+     */
     public void revive() {
         this.dead = false;
         this.refresh();
     }
 
+    /**
+     * Kill this node and refresh it.
+     */
     public void kill() {
         this.dead = true;
         this.refresh();
     }
 
+    /**
+     * @return Whether this node has died.
+     */
     public boolean isDead() {
         return dead;
     }
 
+    /**
+     * @return The name of this node.
+     */
     public String name() {
         return this.suicider.getName();
     }
 
+    /**
+     * @return The original position of this node in the list.
+     */
     public int position() {
         return this.suicider.getPosition();
     }
 
+    /**
+     * @return Whether this node is named "Kitsos".
+     */
     public boolean isKitsos() {
         return this.name().equals("Kitsos");
     }

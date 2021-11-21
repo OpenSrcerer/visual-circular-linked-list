@@ -1,3 +1,9 @@
+/*
+ * Made for the Project in CS215, due November 22nd 2021.
+ * This work is licensed under the GNU General Public License v3.0
+ * GNU © 2021 Daniel Stefani / OpenSrcerer
+ */
+
 package personal.opensrcerer.ui.components.regular;
 
 import personal.opensrcerer.ui.components.events.ButtonClickAdapter;
@@ -15,7 +21,7 @@ import java.awt.*;
 public class KButton extends KPanel {
 
     /**
-     * Retrieves a custom JButton.
+     * Creates a custom JButton.
      * @param text Name and initial text of button.
      */
     public KButton(String text, ButtonType type) {
@@ -25,6 +31,11 @@ public class KButton extends KPanel {
         Painter.paintBase(this);
     }
 
+    /**
+     * Add a custom themed JButton this object.
+     * @param text Text the button should have.
+     * @param type The type of the button, used by action listeners.
+     */
     private void addButton(String text, ButtonType type) {
         JButton button = new JButton();
         button.setText(text);

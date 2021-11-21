@@ -1,3 +1,9 @@
+/*
+ * Made for the Project in CS215, due November 22nd 2021.
+ * This work is licensed under the GNU General Public License v3.0
+ * GNU © 2021 Daniel Stefani / OpenSrcerer
+ */
+
 package personal.opensrcerer.ui;
 
 import personal.opensrcerer.ui.components.custom.Banner;
@@ -11,14 +17,29 @@ import personal.opensrcerer.ui.styling.Fonts;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A class that manages static instances of the main Window layout.
+ */
 public abstract class WindowLayout {
 
+    /**
+     * The top banner to display messages.
+     */
     public static final Banner banner = new Banner();
 
+    /**
+     * The KTextField where users input the suicide number.
+     */
     public static final KTextField suiciderNumberField = new KTextField("", 5, FieldType.SUICIDERS);
 
+    /**
+     * The KTextField where users input the magic number.
+     */
     public static final KTextField magicNumberField = new KTextField("", 5, FieldType.MAGIC_NUMBER);
 
+    /**
+     * An array of the four pagination buttons.
+     */
     public static final KButton[] buttons = {
             new KButton("Previous", ButtonType.PREVIOUS),
             new KButton("First", ButtonType.FIRST),
@@ -26,10 +47,16 @@ public abstract class WindowLayout {
             new KButton("Last", ButtonType.LAST),
     };
 
+    /**
+     * The NodeViewPort instance.
+     */
     public static final NodeViewPort viewportPane = new NodeViewPort();
 
+    /**
+     * Set all elements for the main window pane.
+     */
     public static void set() {
-        final JPanel mainPanel = new KPanel(BoxLayout.PAGE_AXIS),
+        final JPanel mainPanel =    new KPanel(BoxLayout.PAGE_AXIS),
                 viewportWrapper =   new KPanel(),
                 textFieldWrapper =  new KPanel(BoxLayout.LINE_AXIS, DiscordColor.darkPurple),
                 leftFieldWrapper =  new KPanel(BoxLayout.PAGE_AXIS, DiscordColor.darkPurple),
